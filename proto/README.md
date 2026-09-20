@@ -1,5 +1,6 @@
 Resources
 - https://protobuf.dev/getting-started/pythontutorial/
+- https://protobuf.dev/programming-guides/proto3/
 - https://www.youtube.com/watch?v=46O73On0gyI
 
 # Problem Domain
