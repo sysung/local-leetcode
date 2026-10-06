@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: medium
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Combine Hardware Test Sessions
 
@@ -11,16 +11,12 @@ updated: 2026-09-30
 
 ## Problem
 
-Given integer `(start, end)` test-session intervals with `start <= end`, return their sorted union. Merge overlapping intervals and intervals that touch at an endpoint. Preserve the original input list. Zero-length intervals are valid.
+You are given a list of test-session intervals, `intervals`. Each interval is `(start, end)` with `start <= end`.
 
-This models consolidating hardware test activity before calculating equipment utilization.
+Merge overlapping intervals and intervals that touch at an endpoint. Return the merged intervals sorted by start time.
 
-## Function signature
-
-```python
-def merge_intervals(intervals: list[tuple[int, int]]) -> list[tuple[int, int]]:
-    ...
-```
+- Zero-length intervals are valid.
+- Do not modify the input list.
 
 ## Example 1
 

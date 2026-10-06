@@ -11,14 +11,15 @@ updated: 2026-10-05
 
 ## Problem
 
-Different record versions use different field names. Return one new dictionary per input record, in input order, with exactly `item_id`, `timestamp`, and `status`. For `item_id`, use the first present key in `["item_id", "id"]`; for `timestamp`, use `["timestamp", "time"]`; for `status`, use `["status", "result"]`. A key is present even if its value is `None`, `0`, `False`, or an empty string. If no alias is present, use `None`. Preserve the chosen values without conversion, and discard unrelated fields.
+You are given a list of dictionaries, `records`, whose field names may differ.
 
-## Function signature
+Return one new dictionary per record, in input order, containing exactly `item_id`, `timestamp`, and `status`.
 
-```python
-def normalize_records(records: list[dict[str, object]]) -> list[dict[str, object]]:
-    ...
-```
+- For `item_id`, prefer `item_id`, then `id`.
+- For `timestamp`, prefer `timestamp`, then `time`.
+- For `status`, prefer `status`, then `result`.
+- Use the first key that exists, even if its value is `None`, `0`, `False`, or `""`. If neither key exists, use `None`.
+- Keep selected values unchanged and discard unrelated fields.
 
 ## Example 1
 

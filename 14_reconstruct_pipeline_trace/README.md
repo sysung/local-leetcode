@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: hard
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Reconstruct a Pipeline Execution Trace
 
@@ -11,16 +11,14 @@ updated: 2026-09-30
 
 ## Problem
 
-Each `(source, destination)` tuple records one directed transition between pipeline stages. Starting at `start`, reconstruct a node sequence that uses every transition exactly once. Duplicate transitions are separate edges. If several complete traces exist, return the lexicographically smallest node sequence using normal Python string ordering. Return `[start]` for no transitions. Raise `ValueError` when no complete trace exists from the given start.
+You are given directed transitions, `transitions`, and a starting stage, `start`. Each transition is `(source, destination)`.
 
-This is a simplified trace-reconstruction model: assume all supplied transitions belong to one execution whose ordering was lost. Real traces may require additional correlation information.
+Return a sequence of stages that starts at `start` and uses every transition exactly once.
 
-## Function signature
-
-```python
-def reconstruct_trace(transitions: list[tuple[str, str]], start: str) -> list[str]:
-    ...
-```
+- Duplicate transitions must each be used once.
+- If several complete sequences exist, return the lexicographically smallest using Python string ordering.
+- Return `[start]` if there are no transitions.
+- Raise `ValueError` if no complete sequence can start at `start`.
 
 ## Example 1
 

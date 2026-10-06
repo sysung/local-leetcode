@@ -11,14 +11,15 @@ updated: 2026-10-05
 
 ## Problem
 
-A package name follows `group_item_revision_result_timestamp.zip`. The group and item each contain one or more ASCII letters, digits, or hyphens. Revision and timestamp each contain one or more ASCII digits and represent nonnegative integers. Result is exactly `PASS` or `FAIL`; the extension is exactly lowercase `.zip`. Return a dictionary with keys `group`, `item`, `revision`, `result`, and `timestamp`, converting the two numeric fields to integers. Return `None` if any part is invalid. Validate the whole input: surrounding whitespace, extra fields, directory prefixes, and trailing text are invalid. Leading zeroes in numeric fields are valid. Treat timestamp as an integer, with no calendar interpretation.
+You are given a package filename, `name`, with the format `group_item_revision_result_timestamp.zip`.
 
-## Function signature
+Return a dictionary containing `group`, `item`, `revision`, `result`, and `timestamp`. Convert `revision` and `timestamp` to integers. Return `None` if the filename is invalid.
 
-```python
-def parse_package_name(name: str) -> dict[str, str | int] | None:
-    ...
-```
+- `group` and `item` contain one or more ASCII letters, digits, or hyphens.
+- `revision` and `timestamp` contain one or more ASCII digits; leading zeroes are allowed.
+- `result` is exactly `PASS` or `FAIL`, and the extension is lowercase `.zip`.
+- Reject surrounding whitespace, extra fields, directory prefixes, and trailing text.
+- Treat the timestamp as an integer, not a calendar date.
 
 ## Example 1
 

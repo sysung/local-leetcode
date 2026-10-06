@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: easy
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Join Events with Device Metadata
 
@@ -11,18 +11,13 @@ updated: 2026-09-30
 
 ## Problem
 
-Each event contains a `device_id` and arbitrary additional fields. Each metadata record contains `device_id`, `model`, and `site`. Return copies of all events, adding `model` and `site` from matching metadata. Unknown devices receive `None` for both fields. Duplicate metadata IDs use the last record. Preserve event order and all other event fields; metadata values replace any existing `model` and `site` fields.
+You are given event dictionaries, `events`, and device metadata, `devices`. Both contain a `device_id`; metadata also contains `model` and `site`.
 
-This models enrichment in an ETL framework without a database or dataframe library.
+Return copies of the events with `model` and `site` from the matching device.
 
-## Function signature
-
-```python
-def enrich_events(events: list[dict[str, Any]], devices: list[dict[str, str]]) -> list[dict[str, Any]]:
-    ...
-```
-
-`Any` is imported from `typing`.
+- For unknown devices, set both fields to `None`.
+- If metadata contains the same device ID more than once, use the last record.
+- Replace any existing `model` and `site` fields, preserving all other fields and event order.
 
 ## Example 1
 

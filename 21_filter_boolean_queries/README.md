@@ -11,14 +11,16 @@ updated: 2026-10-05
 
 ## Problem
 
-Each record is a set of labels. Return the zero-based indices of records that satisfy a query, preserving input order. A label is true when it belongs to the record. Query labels match `[a-z][a-z0-9_]*`. Operators are `!` (NOT), `&` (AND), and `|` (OR), with precedence in that order; binary operators associate left-to-right. Parentheses override precedence. Consecutive NOT operators are valid. Whitespace is ignored between tokens, but cannot split a label. There are no implicit operators: `a b` and `a(b)` are invalid. Raise `ValueError` for an empty query, illegal characters, missing operands/operators, or unmatched parentheses, even when records is empty. Parse without `eval`, and support nesting deeper than Python's recursion limit.
+You are given label sets, `records`, and a Boolean expression, `query`.
 
-## Function signature
+Return the zero-based indices of records that satisfy the query, in input order. A label is true if it is present in that record.
 
-```python
-def filter_records(records: list[set[str]], query: str) -> list[int]:
-    ...
-```
+- Labels match `[a-z][a-z0-9_]*`.
+- Operators are `!` (NOT), `&` (AND), and `|` (OR), from highest to lowest precedence. AND and OR associate left-to-right.
+- Parentheses override precedence, and repeated NOT operators are allowed.
+- Ignore whitespace between tokens, but do not allow it inside a label. Operators must be explicit: `a b` and `a(b)` are invalid.
+- Raise `ValueError` for an empty query, illegal characters, missing operands or operators, or unmatched parentheses, even if `records` is empty.
+- Do not use `eval`. Support nesting deeper than Python's recursion limit.
 
 ## Example 1
 

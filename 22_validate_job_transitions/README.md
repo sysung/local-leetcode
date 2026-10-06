@@ -11,14 +11,19 @@ updated: 2026-10-05
 
 ## Problem
 
-Replay arrival-ordered `(job_id, state)` events. A new job must first enter `QUEUED`. Allowed transitions are `QUEUED -> RUNNING`, `QUEUED -> CANCELLED`, and `RUNNING -> SUCCEEDED`, `RUNNING -> FAILED`, or `RUNNING -> CANCELLED`. The last three states are terminal. Reject any other event, including unknown states, repeated states, or restarting a terminal job. Rejection leaves the accepted state unchanged and does not prevent later valid events from being processed. Return `(states, rejected_indices)`, where `states` maps each job with at least one accepted event to its latest accepted state and rejected indices are zero-based, in arrival order. Jobs with only rejected events are absent.
+You are given arrival-ordered job events, `events`. Each event is `(job_id, state)`.
 
-## Function signature
+Process each job independently. A new job must start in `QUEUED`, with these allowed transitions:
 
-```python
-def validate_job_history(events: list[tuple[str, str]]) -> tuple[dict[str, str], list[int]]:
-    ...
-```
+- `QUEUED` → `RUNNING` or `CANCELLED`.
+- `RUNNING` → `SUCCEEDED`, `FAILED`, or `CANCELLED`.
+- `SUCCEEDED`, `FAILED`, and `CANCELLED` are terminal: no further transitions are allowed.
+
+Return `(states, rejected_indices)`. `states` maps each job to its latest accepted state; `rejected_indices` lists rejected events' zero-based indices in arrival order.
+
+- Reject unknown states, repeated states, and all other invalid transitions.
+- A rejected event does not change the job's state; continue processing later events.
+- Omit jobs that have no accepted events.
 
 ## Example 1
 

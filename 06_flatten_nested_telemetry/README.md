@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: medium
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Flatten Nested Telemetry
 
@@ -11,18 +11,14 @@ updated: 2026-09-30
 
 ## Problem
 
-Flatten a nested telemetry dictionary into a dictionary whose keys are dotted paths. Dictionary nodes can contain more dictionaries or scalar leaves (strings, integers, floats, booleans, or `None`). Preserve leaf values exactly. Empty dictionaries produce no output entries. Keys are nonempty strings with no dots, so paths cannot collide. Dictionary output order is not significant.
+You are given a nested dictionary, `record`.
 
-Telemetry schema evolution can introduce nested hardware measurements. This exercise treats the document as a tree and prepares leaves for tabular analysis. Use iterative traversal to support nesting deeper than Python's recursion limit.
+Return a flat dictionary whose keys join the nested keys with dots. For example, `{"gpu": {"temp": 80}}` becomes `{"gpu.temp": 80}`.
 
-## Function signature
-
-```python
-def flatten_telemetry(record: dict[str, Any]) -> dict[str, Any]:
-    ...
-```
-
-`Any` is imported from `typing`.
+- Keep scalar values unchanged, including strings, numbers, booleans, and `None`.
+- Empty dictionaries add no entries; output order does not matter.
+- Keys are nonempty strings without dots, so paths cannot collide.
+- Use iterative traversal to handle nesting deeper than Python's recursion limit.
 
 ## Example 1
 

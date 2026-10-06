@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: medium
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Merge Sorted Hardware Event Streams
 
@@ -11,18 +11,14 @@ updated: 2026-09-30
 
 ## Problem
 
-Given a list of individually timestamp-sorted iterables of `(timestamp, event_id)` tuples, yield a single timestamp-sorted stream. Equal timestamps favor the lower input-stream index; preserve each stream's internal order. The IDs do not participate in ordering.
+You are given a list of streams, `streams`. Each stream contains `(timestamp, event_id)` tuples sorted by timestamp.
 
-Independent hardware test stations produce sorted streams that a data platform must combine. Consume inputs incrementally, keeping at most one buffered event per stream. Return an iterator, not a list. Consuming iterators is expected; do not edit caller-owned collections.
+Return an iterator that yields all events in timestamp order.
 
-## Function signature
-
-```python
-def merge_streams(streams: list[Iterable[tuple[int, str]]]) -> Iterator[tuple[int, str]]:
-    ...
-```
-
-`Iterable` and any `Iterator` annotation are imported from `collections.abc`.
+- For equal timestamps, choose the event from the lower-indexed input stream first.
+- Preserve each stream's internal order; event IDs do not affect sorting.
+- Read streams incrementally, buffering at most one event per stream.
+- Consuming input iterators is allowed, but do not modify input collections.
 
 ## Example 1
 

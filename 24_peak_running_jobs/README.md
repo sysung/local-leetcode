@@ -11,14 +11,14 @@ updated: 2026-10-05
 
 ## Problem
 
-Each `(start, end)` tuple describes when a job occupies a worker, using a half-open interval `[start, end)`. Return the maximum number of jobs running at the same time. A job ending at time t does not overlap with a job starting at time t. Zero-duration jobs occupy no worker. Intervals may arrive unsorted and identical intervals represent distinct jobs. Return `0` for no intervals. Only return the count, not the jobs or peak time.
+You are given job intervals, `intervals`. Each `(start, end)` describes a job that runs from `start` up to, but not including, `end`.
 
-## Function signature
+Return the maximum number of jobs running at the same time.
 
-```python
-def peak_concurrency(intervals: list[tuple[int, int]]) -> int:
-    ...
-```
+- A job ending at a time does not overlap with a job starting at that same time.
+- Zero-duration jobs do not count.
+- Intervals may be unsorted, and duplicate intervals represent separate jobs.
+- Return `0` for an empty list. Return only the count, not the jobs or time.
 
 ## Example 1
 

@@ -11,14 +11,16 @@ updated: 2026-10-05
 
 ## Problem
 
-Parse a single log line containing whitespace-separated `key=value` fields into a dictionary. Keys match `[a-z][a-z0-9_]*`. A value is either a nonempty unquoted sequence containing no whitespace or double quotes, or a double-quoted sequence that may contain spaces and may be empty. An equals sign is allowed inside either form of value. Quoted values must be entirely enclosed: text immediately before or after the quotes is invalid. Whitespace may appear between fields and at either end, but not between a key and its equals sign or between the equals sign and its value. Repeated keys use the last value. Remove enclosing quotes and preserve all other value characters exactly. Return `{}` for an empty or whitespace-only line, and `None` if any field is invalid; do not return a partial record. No escaping syntax is supported.
+You are given a log string, `line`, containing whitespace-separated `key=value` fields.
 
-## Function signature
+Return a dictionary of keys and string values. Return `None` if any field is invalid, or `{}` if the line is empty or contains only whitespace.
 
-```python
-def parse_fields(line: str) -> dict[str, str] | None:
-    ...
-```
+- Keys match `[a-z][a-z0-9_]*`.
+- Unquoted values are nonempty and contain no whitespace or double quotes.
+- Double-quoted values may contain whitespace or be empty. Remove only the enclosing quotes; no escaping is supported.
+- Values may contain `=`. Quoted values cannot have text immediately before or after the quotes.
+- Allow whitespace between fields and at either end, but not around a field's `=` separator.
+- Repeated keys keep the last value. Preserve all other value characters and never return a partial record.
 
 ## Example 1
 

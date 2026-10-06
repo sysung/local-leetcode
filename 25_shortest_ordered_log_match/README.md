@@ -11,14 +11,13 @@ updated: 2026-10-05
 
 ## Problem
 
-Given a list of log-code strings and an ordered list of required codes, return inclusive `(start_index, end_index)` indices of the shortest contiguous log slice containing the required codes as a subsequence. Required codes must appear in order, but unrelated codes may lie between them. Each required occurrence needs a distinct log occurrence, including when required codes repeat. Minimize the number of log entries in the slice, breaking ties by earliest start. Return `None` if requirements are empty or no matching slice exists. Unlike a set-coverage problem, matching the right codes in the wrong order is insufficient.
+You are given two lists of strings, `codes` and `required`.
 
-## Function signature
+Return the inclusive `(start, end)` indices of the shortest contiguous slice of `codes` that contains the required codes in order. Other codes may appear between matches.
 
-```python
-def shortest_ordered_match(codes: list[str], required: list[str]) -> tuple[int, int] | None:
-    ...
-```
+- Repeated required codes must match separate log entries.
+- If multiple slices have the same length, choose the earliest start.
+- Return `None` if `required` is empty or no match exists.
 
 ## Example 1
 

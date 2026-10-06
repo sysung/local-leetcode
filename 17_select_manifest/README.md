@@ -11,14 +11,15 @@ updated: 2026-10-05
 
 ## Problem
 
-Given relative file paths from an archive, return the preferred manifest path or `None` if none exists. Recognize exact basenames `manifest.json`, `summary.txt`, and `output.txt`, in that order of priority. Filename priority takes precedence over location. Within the same filename, prefer the path with the fewest directory components; if still tied, choose the lexicographically smallest full path using Python string ordering. Ignore every other basename. Paths are case-sensitive. Operate on the supplied strings; do not open an archive or access the filesystem.
+You are given a list of relative file paths, `paths`.
 
-## Function signature
+Return the preferred path, choosing filenames in this priority order: `manifest.json`, `summary.txt`, then `output.txt`.
 
-```python
-def select_manifest(paths: list[str]) -> str | None:
-    ...
-```
+- Filename priority comes before location.
+- For the same filename, choose the path with the fewest directory components.
+- If still tied, choose the lexicographically smallest full path using Python string ordering.
+- Match filenames exactly and case-sensitively; ignore other filenames.
+- Return `None` if no recognized file exists. Use only the supplied path strings.
 
 ## Example 1
 

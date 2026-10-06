@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: medium
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Resolve ETL Dependencies
 
@@ -11,16 +11,14 @@ updated: 2026-09-30
 
 ## Problem
 
-A dictionary maps each task name to a list of prerequisites. Return a valid execution order containing every named task, including tasks mentioned only as prerequisites. At each step, choose the alphabetically smallest currently available task. Repeated prerequisite names represent one dependency. Raise `ValueError` if any cycle prevents a complete order, including a self-dependency.
+You are given a dictionary, `dependencies`, mapping task names to their prerequisites.
 
-This models orchestration of extraction, validation, transformation, and data-lake publishing stages.
+Return an execution order in which every prerequisite comes before its task.
 
-## Function signature
-
-```python
-def order_tasks(dependencies: dict[str, list[str]]) -> list[str]:
-    ...
-```
+- Include all named tasks, even those mentioned only as prerequisites.
+- At each step, choose the alphabetically smallest task whose prerequisites are complete.
+- Repeated prerequisite names count as one dependency.
+- Raise `ValueError` if a cycle prevents a complete order, including a task that depends on itself.
 
 ## Example 1
 

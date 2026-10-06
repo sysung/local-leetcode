@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: easy
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Calculate Device Test Yield
 
@@ -11,16 +11,15 @@ updated: 2026-09-30
 
 ## Problem
 
-Given test dictionaries with `device_id` and `status`, return a dictionary keyed by device ID. Each value contains integer `total`, integer `failures`, and floating-point `pass_rate`. Pass rate is successful tests divided by total tests, between zero and one. Include only devices present in the input; status is either `PASS` or `FAIL`.
+You are given a list of test records, `records`. Each record has a `device_id` and a status of `PASS` or `FAIL`.
 
-This models a transformation feeding hardware-quality reporting and analytics.
+Return a dictionary keyed by device ID. For each device, include:
 
-## Function signature
+- `total`: the number of tests.
+- `failures`: the number of failed tests.
+- `pass_rate`: the number of passed tests divided by `total`, as a float.
 
-```python
-def summarize_tests(records: list[dict[str, str]]) -> dict[str, dict[str, int | float]]:
-    ...
-```
+Include only devices that appear in the input.
 
 ## Example 1
 

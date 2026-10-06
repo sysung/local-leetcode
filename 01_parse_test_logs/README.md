@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: easy
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Parse Hardware Test Logs
 
@@ -11,16 +11,14 @@ updated: 2026-09-30
 
 ## Problem
 
-A hardware test station emits one comma-separated record per line: `timestamp,device_id,status`. Convert valid lines into dictionaries with keys `timestamp`, `device_id`, and `status`. The timestamp must be a nonnegative integer; status must be exactly `PASS` or `FAIL`. Trim surrounding whitespace from all three fields. Skip invalid lines rather than stopping the batch, and preserve the order of valid records. An integer timestamp may contain an optional leading `+` or `-`, followed by ASCII digits; a negative value is invalid.
+You are given a list of strings, `lines`. Each valid line has the format `timestamp,device_id,status`.
 
-This models the first ingestion step for semi-structured chip, board, and server test logs.
+Return a list of dictionaries containing `timestamp`, `device_id`, and `status` for each valid line.
 
-## Function signature
-
-```python
-def parse_logs(lines: list[str]) -> list[dict[str, int | str]]:
-    ...
-```
+- Trim whitespace around each field and preserve input order.
+- Skip lines with missing or extra fields, an empty device ID, an invalid timestamp, or an invalid status.
+- Timestamps must be nonnegative integers written with ASCII digits and an optional leading `+` or `-`.
+- Status must be exactly `PASS` or `FAIL`.
 
 ## Example 1
 

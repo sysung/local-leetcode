@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: hard
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Balance Ordered ETL Workloads
 
@@ -11,16 +11,13 @@ updated: 2026-09-30
 
 ## Problem
 
-Each nonnegative integer load estimates the processing cost of an ordered input partition. Split the sequence into exactly `batch_count` nonempty contiguous batches while preserving order. Return the smallest possible maximum batch sum; do not return the actual partitions.
+You are given a list of processing costs, `loads`, and an integer `batch_count`.
 
-This models balancing work across processing batches while retaining source order. Raise `ValueError` for an empty input, negative load, or a batch count outside `1..len(loads)`.
+Split `loads` into exactly `batch_count` nonempty contiguous batches. Return the smallest possible value of the largest batch sum.
 
-## Function signature
-
-```python
-def minimize_max_batch_load(loads: list[int], batch_count: int) -> int:
-    ...
-```
+- Preserve the order of the loads.
+- Return only the minimum largest sum, not the batches.
+- Raise `ValueError` if the input is empty, a load is negative, or `batch_count` is outside `1..len(loads)`.
 
 ## Example 1
 

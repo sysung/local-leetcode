@@ -11,14 +11,14 @@ updated: 2026-10-05
 
 ## Problem
 
-An archive may contain multiple independently described runs. Each supplied manifest path ends in `manifest.json`; its parent directory is a run root. For every supplied measurement path, find the deepest run root that contains that file, including all descendants. Return a dictionary mapping each measurement path to its root directory, or `None` if no root contains it. Represent the archive root as the empty string `""`. Compare whole path components: root `run` contains `run/log.txt` but does not contain `runner/log.txt`. Nested manifests override outer manifests for files beneath them. All paths refer to files in the same archive; use the path strings without filesystem access.
+You are given two lists of file paths: `manifest_paths` and `measurement_paths`. Each manifest is named `manifest.json`, and its parent directory defines a root.
 
-## Function signature
+Return a dictionary mapping each measurement path to the deepest root that contains it, or `None` if no root contains it.
 
-```python
-def assign_roots(manifest_paths: list[str], measurement_paths: list[str]) -> dict[str, str | None]:
-    ...
-```
+- Nested roots take priority over their parent roots.
+- Match whole directory components: `run` contains `run/log.txt`, but not `runner/log.txt`.
+- Represent the archive root as `""`.
+- All paths belong to the same archive. Use only the supplied strings.
 
 ## Example 1
 

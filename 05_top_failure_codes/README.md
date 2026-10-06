@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: easy
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Rank the Most Frequent Failure Codes
 
@@ -11,16 +11,13 @@ updated: 2026-09-30
 
 ## Problem
 
-Given a list of failure-code strings and integer `k`, return up to `k` `(code, count)` pairs. Rank higher counts first; break ties alphabetically by code. Return an empty list if `k <= 0`. If fewer than `k` distinct codes exist, return them all.
+You are given a list of failure codes, `codes`, and an integer `k`.
 
-This models prioritizing the most common chip or board test failures for analysis.
+Return up to `k` `(code, count)` pairs, ordered from most frequent to least frequent.
 
-## Function signature
-
-```python
-def top_failure_codes(codes: list[str], k: int) -> list[tuple[str, int]]:
-    ...
-```
+- Break frequency ties alphabetically by code.
+- If fewer than `k` distinct codes exist, return them all.
+- Return `[]` if `k <= 0`.
 
 ## Example 1
 

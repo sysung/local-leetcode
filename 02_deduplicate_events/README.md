@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: easy
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Keep the Newest Event
 
@@ -11,18 +11,13 @@ updated: 2026-09-30
 
 ## Problem
 
-Each event dictionary contains a string `event_id`, an integer `timestamp`, and an arbitrary `payload`. Return one record per event ID: the record with the greatest timestamp. If timestamps tie, the last occurrence in the input wins. Sort the returned records alphabetically by event ID and preserve every field on the selected record.
+You are given a list of event dictionaries, `events`. Each event has an `event_id`, a `timestamp`, and a `payload`.
 
-Retrying and replaying an ingestion pipeline can produce duplicate telemetry events; this exercise models deterministic deduplication.
+Return one event per ID, keeping the event with the greatest timestamp.
 
-## Function signature
-
-```python
-def deduplicate_events(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    ...
-```
-
-`Any` is imported from `typing`.
+- If timestamps tie, keep the last occurrence in the input.
+- Sort the result alphabetically by event ID.
+- Keep all fields from each selected event.
 
 ## Example 1
 

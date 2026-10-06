@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: hard
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Find the Smallest Complete Diagnostic Sequence
 
@@ -11,16 +11,14 @@ updated: 2026-09-30
 
 ## Problem
 
-Given diagnostic-code strings and a set of required codes, return inclusive `(start_index, end_index)` indices of the shortest contiguous sequence containing every required code at least once. Minimize the number of events, not elapsed time. Ties favor the earliest starting index. Return `None` when requirements are empty or no sequence covers them all.
+You are given a list of diagnostic codes, `codes`, and a set of required codes, `required`.
 
-A hardware engineer wants the smallest slice of a diagnostic trace that contains all relevant failure categories. Target O(n + r) time for n events and r required codes.
+Return the inclusive `(start, end)` indices of the shortest contiguous slice containing every required code at least once. The codes may appear in any order.
 
-## Function signature
-
-```python
-def minimum_test_coverage(codes: list[str], required: set[str]) -> tuple[int, int] | None:
-    ...
-```
+- Minimize the number of entries in the slice, not elapsed time.
+- If slices have the same length, choose the earliest start.
+- Return `None` if `required` is empty or no matching slice exists.
+- Target O(n + r) time, where n is the number of codes and r is the number of required codes.
 
 ## Example 1
 

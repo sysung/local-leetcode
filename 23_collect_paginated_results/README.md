@@ -11,14 +11,14 @@ updated: 2026-10-05
 
 ## Problem
 
-A dictionary maps each cursor string to `(items, next_cursor)`. Items is a list of `(item_id, value)` tuples; next_cursor is another cursor or `None`, marking the end. Starting from `start_cursor`, follow the chain and return one tuple per distinct item ID. Preserve the order in which IDs are first encountered, but use the last encountered value for each ID. An empty page may still point to another page. Return `[]` when start_cursor is `None`. Raise `ValueError` if a followed cursor is missing or if the chain revisits a cursor. Ignore unreachable pages, including any errors in their links. An empty string is a valid cursor and must not be treated as end-of-chain. No network requests are needed.
+You are given a dictionary of `pages` and a `start_cursor`. Each page maps a cursor to `(items, next_cursor)`, where items are `(item_id, value)` tuples.
 
-## Function signature
+Follow the cursor chain and return one tuple per item ID. Keep IDs in the order they first appear, but use each ID's last encountered value.
 
-```python
-def collect_pages(pages: dict[str, tuple[list[tuple[str, int]], str | None]], start_cursor: str | None) -> list[tuple[str, int]]:
-    ...
-```
+- Stop when the next cursor is `None`. An empty string is a valid cursor, and empty pages may lead to more pages.
+- Return `[]` if `start_cursor` is `None`.
+- Raise `ValueError` if a followed cursor is missing or visited twice.
+- Ignore unreachable pages and their links. No network requests are needed.
 
 ## Example 1
 

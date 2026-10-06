@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: hard
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Track Sliding Temperature Medians
 
@@ -11,16 +11,14 @@ updated: 2026-09-30
 
 ## Problem
 
-Given integer temperature readings and window size k, return one floating-point median for every consecutive window of exactly k readings. For even k, average the two middle values. Repeated readings are distinct occurrences. Raise `ValueError` unless `1 <= k <= len(values)`.
+You are given integer temperature readings, `values`, and a window size `k`.
 
-Rolling medians resist occasional sensor spikes in hardware telemetry. Target O(n log(k + 1)) time and O(k) auxiliary space. Expired entries must not accumulate indefinitely in the heaps; periodically compact them.
+Return a list containing the median of each consecutive window of `k` readings, as a float.
 
-## Function signature
-
-```python
-def sliding_medians(values: list[int], k: int) -> list[float]:
-    ...
-```
+- For even `k`, average the two middle values.
+- Repeated readings count as separate entries.
+- Raise `ValueError` unless `1 <= k <= len(values)`.
+- Target O(n log(k + 1)) time and O(k) auxiliary space. If you use heaps, compact them so expired entries do not accumulate indefinitely.
 
 ## Example 1
 

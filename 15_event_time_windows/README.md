@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: hard
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Aggregate Out-of-Order Event-Time Windows
 
@@ -11,20 +11,17 @@ updated: 2026-09-30
 
 ## Problem
 
-Process arrival-ordered `(timestamp, device_id, status)` events. Aggregate each accepted event by device into fixed windows `[j * window_size, (j + 1) * window_size)`. Return `(summaries, rejected_indices)`, where summaries contain `(window_start, device_id, total, failures)` tuples ordered by window start, then device ID. Rejected indices use zero-based input positions in arrival order. Do not output empty windows.
+You are given arrival-ordered `events`, a `window_size`, and `allowed_lateness`. Each event is `(timestamp, device_id, status)`.
 
-The watermark starts at negative infinity. Before handling an event, reject it if its timestamp is strictly below the existing watermark; equality is accepted. After accepting an event, advance the watermark to maximum observed timestamp minus `allowed_lateness`. Finalize windows whose end is at or below that watermark. Flush remaining windows at end of input. A rejected event contributes no counts.
+Group accepted events by device into time windows of length `window_size` starting at multiples of `window_size`. Each window includes its start and excludes its end.
 
-This models event-time aggregation when test-station telemetry arrives out of order. Retain aggregation state only for open windows. `window_size` must be positive, `allowed_lateness` nonnegative, and timestamps nonnegative; otherwise raise `ValueError`.
+Return `(summaries, rejected_indices)`. Each summary is `(window_start, device_id, total, failures)`; sort summaries by window start, then device ID.
 
-## Function signature
-
-```python
-def aggregate_event_time(events: Iterable[tuple[int, str, str]], window_size: int, allowed_lateness: int) -> tuple[list[tuple[int, str, int, int]], list[int]]:
-    ...
-```
-
-`Iterable` and any `Iterator` annotation are imported from `collections.abc`.
+- The watermark starts at negative infinity. Reject an event if its timestamp is below the current watermark; equality is accepted.
+- After accepting an event, set the watermark to the greatest accepted timestamp minus `allowed_lateness`.
+- Finalize windows whose end is at or below the watermark. Keep counts only for open windows, and flush them at the end.
+- Rejected events add no counts. Return their zero-based input indices in arrival order, and omit empty windows.
+- Raise `ValueError` if `window_size <= 0`, `allowed_lateness < 0`, or any timestamp is negative.
 
 ## Example 1
 

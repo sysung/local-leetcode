@@ -2,7 +2,7 @@
 type: coding-practice
 difficulty: medium
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # Detect Repeated Device Failures
 
@@ -11,16 +11,14 @@ updated: 2026-09-30
 
 ## Problem
 
-Process timestamp-sorted `(timestamp, device_id, status)` events. After each event, count failures for that event's device in `(timestamp - window, timestamp]`. If the count is at least `threshold`, append `(timestamp, device_id, count)` to the result. A PASS event can also trigger an alert if prior failures are still in its window. Emit an alert for every qualifying event, not just when crossing the threshold. Process simultaneous events in input order.
+You are given timestamp-sorted `events`, a window length `window`, and a failure `threshold`. Each event is `(timestamp, device_id, status)`.
 
-This models real-time hardware failure monitoring. Window and threshold must be positive; otherwise raise `ValueError`.
+After each event, count that device's failures at times greater than `timestamp - window` and at most `timestamp`. If the count is at least `threshold`, append `(timestamp, device_id, count)` to the result.
 
-## Function signature
-
-```python
-def failure_alerts(events: list[tuple[int, str, str]], window: int, threshold: int) -> list[tuple[int, str, int]]:
-    ...
-```
+- A `PASS` event can trigger an alert if enough earlier failures remain in its window.
+- Emit an alert for every qualifying event, not only when the count first reaches the threshold.
+- Process events with equal timestamps in input order.
+- Raise `ValueError` if `window` or `threshold` is not positive.
 
 ## Example 1
 
