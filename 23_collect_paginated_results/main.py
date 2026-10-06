@@ -3,19 +3,23 @@ from __future__ import annotations
 
 def collect_pages(pages: dict[str, tuple[list[tuple[str, int]], str | None]], start_cursor: str | None) -> list[tuple[str, int]]:
     """Collect items until the cursor chain ends, goes missing, or repeats."""
-    visited: set[str] = set()
-    items_by_id: dict[str, int] = {}
-    cursor = start_cursor
+    visited = set()
+    values = {}
 
-    while cursor is not None and cursor in pages and cursor not in visited:
+    def visit(cursor):
+        if cursor not in pages or cursor in visited:
+            return
+
         visited.add(cursor)
         items, next_cursor = pages[cursor]
-        for item_id, value in items:
-            # Updating a value preserves the ID's first-seen position.
-            items_by_id[item_id] = value
-        cursor = next_cursor
 
-    return list(items_by_id.items())
+        for item_id, value in items:
+            values[item_id] = value
+
+        visit(next_cursor)
+
+    visit(start_cursor)
+    return list(values.items())
 
 
 if __name__ == "__main__":
