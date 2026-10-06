@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import top_failure_codes
+if __package__:
+    from .main import top_failure_codes
+else:
+    from main import top_failure_codes
 
 
 class TestCases(unittest.TestCase):

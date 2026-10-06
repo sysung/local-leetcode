@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import validate_job_history
+if __package__:
+    from .main import validate_job_history
+else:
+    from main import validate_job_history
 
 
 class TestCases(unittest.TestCase):

@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import minimum_test_coverage
+if __package__:
+    from .main import minimum_test_coverage
+else:
+    from main import minimum_test_coverage
 
 
 class TestCases(unittest.TestCase):

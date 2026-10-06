@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import merge_intervals
+if __package__:
+    from .main import merge_intervals
+else:
+    from main import merge_intervals
 
 
 class TestCases(unittest.TestCase):

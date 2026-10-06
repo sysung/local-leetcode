@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import collect_pages
+if __package__:
+    from .main import collect_pages
+else:
+    from main import collect_pages
 
 
 class TestCases(unittest.TestCase):

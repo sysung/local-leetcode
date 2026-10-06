@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import peak_concurrency
+if __package__:
+    from .main import peak_concurrency
+else:
+    from main import peak_concurrency
 
 
 class TestCases(unittest.TestCase):

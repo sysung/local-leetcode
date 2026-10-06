@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import aggregate_event_time
+if __package__:
+    from .main import aggregate_event_time
+else:
+    from main import aggregate_event_time
 
 
 class TestCases(unittest.TestCase):

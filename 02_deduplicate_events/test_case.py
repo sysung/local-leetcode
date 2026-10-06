@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import deduplicate_events
+if __package__:
+    from .main import deduplicate_events
+else:
+    from main import deduplicate_events
 
 
 class TestCases(unittest.TestCase):

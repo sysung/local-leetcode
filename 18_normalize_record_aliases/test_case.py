@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import normalize_records
+if __package__:
+    from .main import normalize_records
+else:
+    from main import normalize_records
 
 
 class TestCases(unittest.TestCase):

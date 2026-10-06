@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import summarize_tests
+if __package__:
+    from .main import summarize_tests
+else:
+    from main import summarize_tests
 
 
 class TestCases(unittest.TestCase):

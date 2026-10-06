@@ -32,3 +32,9 @@ python3 -m unittest -v test_case.py
 ```
 
 Replace `01_parse_test_logs` with the folder you want to practice. The tests check your `main.py`; unfinished functions raise `NotImplementedError` until you implement them.
+
+To run all problems from the repository root:
+
+```bash
+python3 -m unittest discover -v
+```

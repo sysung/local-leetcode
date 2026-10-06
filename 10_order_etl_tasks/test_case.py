@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import order_tasks
+if __package__:
+    from .main import order_tasks
+else:
+    from main import order_tasks
 
 
 class TestCases(unittest.TestCase):

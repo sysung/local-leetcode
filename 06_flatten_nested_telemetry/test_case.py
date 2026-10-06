@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import flatten_telemetry
+if __package__:
+    from .main import flatten_telemetry
+else:
+    from main import flatten_telemetry
 
 
 class TestCases(unittest.TestCase):

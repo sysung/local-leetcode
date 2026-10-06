@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import parse_package_name
+if __package__:
+    from .main import parse_package_name
+else:
+    from main import parse_package_name
 
 
 class TestCases(unittest.TestCase):

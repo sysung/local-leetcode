@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import reconstruct_trace
+if __package__:
+    from .main import reconstruct_trace
+else:
+    from main import reconstruct_trace
 
 
 class TestCases(unittest.TestCase):

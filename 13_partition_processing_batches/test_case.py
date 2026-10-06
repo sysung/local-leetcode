@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import minimize_max_batch_load
+if __package__:
+    from .main import minimize_max_batch_load
+else:
+    from main import minimize_max_batch_load
 
 
 class TestCases(unittest.TestCase):

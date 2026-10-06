@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import parse_logs
+if __package__:
+    from .main import parse_logs
+else:
+    from main import parse_logs
 
 
 class TestCases(unittest.TestCase):

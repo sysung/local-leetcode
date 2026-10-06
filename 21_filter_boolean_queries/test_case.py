@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import filter_records
+if __package__:
+    from .main import filter_records
+else:
+    from main import filter_records
 
 
 class TestCases(unittest.TestCase):

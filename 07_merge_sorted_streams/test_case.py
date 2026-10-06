@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import merge_streams
+if __package__:
+    from .main import merge_streams
+else:
+    from main import merge_streams
 
 
 class TestCases(unittest.TestCase):

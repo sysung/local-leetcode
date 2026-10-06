@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import shortest_ordered_match
+if __package__:
+    from .main import shortest_ordered_match
+else:
+    from main import shortest_ordered_match
 
 
 class TestCases(unittest.TestCase):

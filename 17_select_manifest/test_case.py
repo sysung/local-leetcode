@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import select_manifest
+if __package__:
+    from .main import select_manifest
+else:
+    from main import select_manifest
 
 
 class TestCases(unittest.TestCase):

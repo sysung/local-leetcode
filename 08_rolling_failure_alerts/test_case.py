@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import failure_alerts
+if __package__:
+    from .main import failure_alerts
+else:
+    from main import failure_alerts
 
 
 class TestCases(unittest.TestCase):

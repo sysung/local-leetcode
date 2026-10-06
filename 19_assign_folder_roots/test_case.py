@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import assign_roots
+if __package__:
+    from .main import assign_roots
+else:
+    from main import assign_roots
 
 
 class TestCases(unittest.TestCase):

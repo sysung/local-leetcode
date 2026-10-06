@@ -3,7 +3,10 @@
 import unittest
 from copy import deepcopy
 
-from main import sliding_medians
+if __package__:
+    from .main import sliding_medians
+else:
+    from main import sliding_medians
 
 
 class TestCases(unittest.TestCase):
