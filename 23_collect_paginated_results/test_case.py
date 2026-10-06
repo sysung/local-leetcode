@@ -53,29 +53,25 @@ class TestCases(unittest.TestCase):
     def test_missing_start(self):
         args: tuple[Pages, str | None] = ({}, 'missing')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            collect_pages(*args)
+        self.assertEqual(collect_pages(*args), [])
         self.assertEqual(args, before)
 
     def test_missing_next(self):
         args: tuple[Pages, str | None] = ({'p': ([('x', 1)], 'missing')}, 'p')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            collect_pages(*args)
+        self.assertEqual(collect_pages(*args), [('x', 1)])
         self.assertEqual(args, before)
 
     def test_self_cycle(self):
-        args: tuple[Pages, str | None] = ({'p': ([], 'p')}, 'p')
+        args: tuple[Pages, str | None] = ({'p': ([('x', 1)], 'p')}, 'p')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            collect_pages(*args)
+        self.assertEqual(collect_pages(*args), [('x', 1)])
         self.assertEqual(args, before)
 
     def test_multi_page_cycle(self):
-        args: tuple[Pages, str | None] = ({'p': ([], 'q'), 'q': ([], 'p')}, 'p')
+        args: tuple[Pages, str | None] = ({'p': ([('b', 1), ('a', 2)], 'q'), 'q': ([('b', 9), ('c', 3)], 'p')}, 'p')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            collect_pages(*args)
+        self.assertEqual(collect_pages(*args), [('b', 9), ('a', 2), ('c', 3)])
         self.assertEqual(args, before)
 
 

@@ -16,8 +16,8 @@ You are given a dictionary of `pages` and a `start_cursor`. Each page maps a cur
 Follow the cursor chain and return one tuple per item ID. Keep IDs in the order they first appear, but use each ID's last encountered value.
 
 - Stop when the next cursor is `None`. An empty string is a valid cursor, and empty pages may lead to more pages.
-- Return `[]` if `start_cursor` is `None`.
-- Raise `ValueError` if a followed cursor is missing or visited twice.
+- Return `[]` if `start_cursor` is `None` or does not exist in `pages`.
+- If a later cursor is missing or already visited, stop before processing it and return the items collected so far.
 - Ignore unreachable pages and their links. No network requests are needed.
 
 ## Example 1
