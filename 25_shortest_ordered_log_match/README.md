@@ -49,7 +49,23 @@ Output:
 (0, 3)
 ```
 
-**Explanation:** Two distinct A occurrences are required.
+**Explanation:** Match `A` at indices 0 and 2, then `B` at index 3. The `B` at index 1 is skipped, so the required codes still appear in order within the slice `(0, 3)`.
+
+## Example 3
+
+Input (positional arguments):
+
+```python
+(['B', 'A'], ['A', 'B'])
+```
+
+Output:
+
+```python
+None
+```
+
+**Explanation:** Both codes exist, but `B` never appears after `A`, so the required order cannot be matched.
 
 ## Constraints
 
