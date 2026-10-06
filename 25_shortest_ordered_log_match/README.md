@@ -33,7 +33,13 @@ Output:
 (4, 6)
 ```
 
-**Explanation:** The later match has no intervening X, so its slice is shorter.
+**Explanation:** Multiple slices can match, but return the shortest one:
+
+- `(0, 3)` contains `["A", "X", "B", "C"]`: valid, length 4.
+- `(4, 6)` contains `["A", "B", "C"]`: valid, length 3.
+- `(3, 5)` contains `["C", "A", "B"]`: invalid, because the required codes do not appear in order.
+
+Return `(4, 6)` because it is the shortest valid slice.
 
 ## Example 2
 
