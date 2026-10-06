@@ -36,7 +36,18 @@ Output:
 [1, 2]
 ```
 
-**Explanation:** AND binds more tightly than OR.
+**Explanation:** For each record, a present label is `True` and an absent label is `False`. Evaluate the entire query using those values; absent labels are not ignored.
+
+AND binds more tightly than OR, so the query groups as `(ready & !failed) | urgent`:
+
+| Index | Record | ready | failed | urgent | Result |
+| --- | --- | --- | --- | --- | --- |
+| 0 | `{"ready", "failed"}` | True | True | False | False |
+| 1 | `{"ready"}` | True | False | False | True |
+| 2 | `{"urgent"}` | False | False | True | True |
+| 3 | `set()` | False | False | False | False |
+
+For record 0, `True & !True | False` is `False`. For record 1, `failed=False` makes `!failed=True`, so it matches. Record 2 matches because `urgent=True`. Return `[1, 2]`, the indices of the matching records.
 
 ## Example 2
 
