@@ -1,13 +1,13 @@
 ---
 type: interview-practice
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-05
 ---
 # NVIDIA Data Platform Python Practice
 
-15 standalone data structures and algorithms problems: **5 easy, 5 medium, and 5 hard**. Scenarios draw from the supplied job description's hardware-test logs, ETL frameworks, data transformations, streaming analytics, and data integrity. These are role-relevant practice exercises, not confirmed NVIDIA interview questions.
+25 standalone data structures and algorithms problems: **8 easy, 10 medium, and 7 hard**. Scenarios draw from the supplied job description's hardware-test logs, ETL frameworks, data transformations, streaming analytics, and data integrity. These are role-relevant practice exercises, not confirmed NVIDIA interview questions.
 
-Use Python 3.10 or later. Everything uses the standard library; no packages, cloud accounts, Spark installation, or database setup are required. References are verified on Python 3.12.
+Use Python 3.10 or later. Everything uses the standard library; no packages, cloud accounts, Spark installation, or database setup are required. The original references were verified on Python 3.12; the additional problems also use only the standard library.
 
 ## Problems
 
@@ -40,6 +40,23 @@ Use Python 3.10 or later. Everything uses the standard library; no packages, clo
 | [Balance Ordered ETL Workloads](13_partition_processing_batches/README.md) | Binary search on the answer, greedy feasibility checking |
 | [Reconstruct a Pipeline Execution Trace](14_reconstruct_pipeline_trace/README.md) | Directed multigraphs, Eulerian paths, iterative Hierholzer traversal |
 | [Aggregate Out-of-Order Event-Time Windows](15_event_time_windows/README.md) | Hash maps, min-heaps, incremental aggregation, watermark-based eviction |
+
+## Additional Problems: Parsing and Job Workflows
+
+Problems 16–25 are inspired by the supplied screenshots' general patterns: package-name validation, manifest precedence, nested folder ownership, evolving record fields, log parsing, query filters, job histories, and paginated results. They use generic files, records, and jobs, with no vendor-specific tools or services. These are practice scenarios, not confirmed interview questions. The paths are in-memory strings; no actual archive or filesystem setup is needed.
+
+| Problem | Difficulty | Data structures and algorithms |
+| --- | --- | --- |
+| [Validate and Parse Package Names](16_parse_package_names/README.md) | Easy | Strings, validation, regular expressions |
+| [Choose the Preferred Manifest](17_select_manifest/README.md) | Easy | Tuple ordering, linear scanning, path components |
+| [Normalize Evolving Record Fields](18_normalize_record_aliases/README.md) | Easy | Hash maps, schema mapping, presence checks |
+| [Assign Files to Their Nearest Manifest](19_assign_folder_roots/README.md) | Medium | Tries, tree ancestry, path component matching |
+| [Parse Quoted Key-Value Fields](20_parse_quoted_fields/README.md) | Medium | Tokenization, strings, hash maps |
+| [Filter Records with a Boolean Query](21_filter_boolean_queries/README.md) | Hard | Stacks, expression parsing, operator precedence, sets |
+| [Validate a Job State History](22_validate_job_transitions/README.md) | Medium | State machines, hash maps, event replay |
+| [Collect a Paginated Result Chain](23_collect_paginated_results/README.md) | Medium | Linked traversal, cycle detection, ordered hash maps |
+| [Find Peak Concurrent Jobs](24_peak_running_jobs/README.md) | Medium | Sweep lines, sorting, interval boundaries |
+| [Find the Shortest Ordered Log Match](25_shortest_ordered_log_match/README.md) | Hard | Dynamic programming, subsequences, reverse updates |
 
 ## How to practice
 
