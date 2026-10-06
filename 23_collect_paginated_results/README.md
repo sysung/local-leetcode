@@ -52,6 +52,54 @@ Output:
 
 **Explanation:** An empty page does not terminate traversal.
 
+## Example 3
+
+Input (positional arguments):
+
+```python
+({}, 'missing')
+```
+
+Output:
+
+```python
+[]
+```
+
+**Explanation:** The start cursor does not exist, so no items are collected.
+
+## Example 4
+
+Input (positional arguments):
+
+```python
+({'p1': ([('x', 1)], 'missing')}, 'p1')
+```
+
+Output:
+
+```python
+[('x', 1)]
+```
+
+**Explanation:** Collect the items from `p1`, then stop because the next cursor is missing. Return the collected items without raising an error.
+
+## Example 5
+
+Input (positional arguments):
+
+```python
+({'p1': ([('b', 1), ('a', 2)], 'p2'), 'p2': ([('b', 9), ('c', 3)], 'p1')}, 'p1')
+```
+
+Output:
+
+```python
+[('b', 9), ('a', 2), ('c', 3)]
+```
+
+**Explanation:** Visit `p1` and `p2` once, then stop before revisiting `p1`. The later value of `b` is kept, and the collected items are returned without raising an error.
+
 ## Constraints
 
 At most 100,000 pages and 200,000 items across all pages. Cursors and item IDs are strings. Values are integers. Page tuples and item tuples have the stated structure.
