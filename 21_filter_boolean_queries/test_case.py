@@ -62,114 +62,109 @@ class TestCases(unittest.TestCase):
     def test_invalid_0(self):
         args = ([], '')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_1(self):
         args = ([], ' ')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_2(self):
         args = ([], 'a b')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_3(self):
         args = ([], 'a(b)')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_4(self):
         args = ([], '()')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_5(self):
         args = ([], '(a')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_6(self):
         args = ([], 'a)')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_7(self):
         args = ([], '&a')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_8(self):
         args = ([], 'a|')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_9(self):
         args = ([], 'a&&b')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_10(self):
         args = ([], 'a!')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_11(self):
         args = ([], 'a ^ b')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_12(self):
         args = ([], 'A')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_13(self):
         args = ([], '1a')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_14(self):
         args = ([], '!')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
 
     def test_invalid_15(self):
         args = ([], '(a|)')
         before = deepcopy(args)
-        with self.assertRaises(ValueError):
-            filter_records(*args)
+        self.assertEqual(filter_records(*args), [])
         self.assertEqual(args, before)
+
+
+    def test_invalid_with_records(self):
+        queries = ('', ' ', 'a b', 'a(b)', '()', '(a', 'a)', '&a',
+                   'a|', 'a&&b', 'a!', 'a ^ b', 'A', '1a', '!', '(a|)')
+        for query in queries:
+            with self.subTest(query=query):
+                args = ([{'a', 'b'}, set()], query)
+                before = deepcopy(args)
+                self.assertEqual(filter_records(*args), [])
+                self.assertEqual(args, before)
 
 
 if __name__ == "__main__":

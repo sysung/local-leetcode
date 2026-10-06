@@ -19,7 +19,7 @@ Return the zero-based indices of records that satisfy the query, in input order.
 - Operators are `!` (NOT), `&` (AND), and `|` (OR), from highest to lowest precedence. AND and OR associate left-to-right.
 - Parentheses override precedence, and repeated NOT operators are allowed.
 - Ignore whitespace between tokens, but do not allow it inside a label. Operators must be explicit: `a b` and `a(b)` are invalid.
-- Raise `ValueError` for an empty query, illegal characters, missing operands or operators, or unmatched parentheses, even if `records` is empty.
+- Return `[]` for an empty query, illegal characters, missing operands or operators, or unmatched parentheses. Invalid queries never produce partial matches.
 - Do not use `eval`. Support nesting deeper than Python's recursion limit.
 
 ## Example 1
@@ -64,6 +64,22 @@ Output:
 ```
 
 **Explanation:** The parentheses make NOT apply to the entire disjunction.
+
+## Example 3
+
+Input (positional arguments):
+
+```python
+([{'a'}, {'b'}], 'a &')
+```
+
+Output:
+
+```python
+[]
+```
+
+**Explanation:** The query is missing an operand after `&`, so return an empty list without raising an error.
 
 ## Constraints
 
