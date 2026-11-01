@@ -11,23 +11,34 @@ updated: 2026-11-01
 
 ## Problem
 
-An identity pipeline links browser, email, and customer identifiers. Resolve every identifier to a stable canonical identity.
+Given a list of links between IDs, return the lexicographically smallest ID connected to each ID, directly or through other IDs.
 
-Implement `resolve_identities(identifiers, links)`.
+Implement `resolve_identities(links)`.
 
-- `identifiers` is a list of nonempty strings. `links` is a list of `(left_id, right_id)` pairs of nonempty strings.
-- Each link is undirected. The universe includes every identifier in `identifiers` and every endpoint in `links`.
-- Identifiers connected directly or transitively belong to one component. The canonical ID is the lexicographically smallest identifier in that component, using Python string ordering.
-- Return one `(identifier, canonical_id)` tuple for every distinct identifier, sorted by identifier.
-- Repeated identifiers, duplicate or reversed links, and self-links have no additional effect. Isolated identifiers map to themselves.
+- `links` is a list of `(left_id, right_id)` pairs. Each ID is a nonempty string.
+- Links work in both directions. If `a` links to `b` and `b` links to `c`, all three belong to the same group.
+- For each distinct ID appearing in `links`, return `(id, smallest_id_in_its_group)`.
+- Sort the returned tuples by ID. Use Python string ordering for both the smallest ID and the output order.
+- Represent an ID with no connections to other IDs using a self-link, such as `('orphan', 'orphan')`.
+- Repeated or reversed links do not change the result. An empty list returns `[]`.
 
 ## Example 1
 
-Input (positional arguments):
+Input:
 
 ```python
-(['orphan'], [('email:a', 'cookie:b'), ('customer:c', 'email:a')])
+[('email:a', 'cookie:b'), ('customer:c', 'email:a'), ('orphan', 'orphan')]
 ```
+
+The links form these groups:
+
+```text
+cookie:b --- email:a --- customer:c
+
+orphan  (self-link)
+```
+
+The first three IDs are connected. Their smallest ID is `cookie:b`, so all three map to it. `orphan` only links to itself, so it maps to itself.
 
 Output:
 
@@ -37,11 +48,13 @@ Output:
 
 ## Example 2
 
-Input (positional arguments):
+Input:
 
 ```python
-(['z', 'b', 'a'], [('z', 'y')])
+[('z', 'y'), ('b', 'b'), ('a', 'a')]
 ```
+
+`z` and `y` are connected, so both map to `y`. The self-links put `a` and `b` in separate groups.
 
 Output:
 
@@ -51,9 +64,9 @@ Output:
 
 ## Constraints
 
-At most 100,000 total input rows or IDs across all input collections. String comparisons and hashing use the usual unit-cost assumption. Integer timestamps, versions, and offsets are at most `10**12`.
+At most 100,000 links. String comparisons and hashing use the usual unit-cost assumption.
 
-Do not modify caller-owned input collections. Assume valid inputs except for validation explicitly required above. Use Python 3.10 or later and only built-ins or standard-library modules.
+Do not modify the input list. Assume valid inputs. Use Python 3.10 or later and only built-ins or standard-library modules.
 
 ## Practice
 

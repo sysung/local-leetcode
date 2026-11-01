@@ -1,16 +1,16 @@
 """Reference solution.
 
 Build an undirected adjacency map, traverse each component once, and assign its smallest
-ID to every member. Iteration avoids recursion limits on long chains. For i entries in
-identifiers, v distinct IDs, and e links, time is O(i + e + v log(v + 1)) and auxiliary
+ID to every member. Iteration avoids recursion limits on long chains. For v distinct IDs
+and e links, time is O(e + v log(v + 1)) and auxiliary
 space is O(v + e), excluding the output.
 """
 
 from __future__ import annotations
 
 
-def resolve_identities(identifiers: list[str], links: list[tuple[str, str]]) -> list[tuple[str, str]]:
-    neighbors = {identifier: set() for identifier in identifiers}
+def resolve_identities(links: list[tuple[str, str]]) -> list[tuple[str, str]]:
+    neighbors = {}
     for left, right in links:
         neighbors.setdefault(left, set()).add(right)
         neighbors.setdefault(right, set()).add(left)
