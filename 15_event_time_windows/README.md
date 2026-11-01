@@ -37,7 +37,16 @@ Output:
 ([(0, 'a', 2, 1), (10, 'a', 1, 0)], [3])
 ```
 
-**Explanation:** Timestamp 3 is accepted against watermark 2. Timestamp 16 advances it to 11, so the final timestamp 4 is rejected.
+**Explanation:** Process the events in arrival order with allowed lateness `5`:
+
+| Input index | Timestamp | Watermark before event | Decision | Watermark after event |
+| --- | --- | --- | --- | --- |
+| 0 | 7 | Negative infinity | Accept | 2 |
+| 1 | 3 | 2 | Accept | 2 |
+| 2 | 16 | 2 | Accept | 11 |
+| 3 | 4 | 11 | Reject | 11 |
+
+Timestamps `7` and `3` fall in window `[0, 10)`, giving two events and one failure for device `a`. Timestamp `16` falls in `[10, 20)`, giving one event and no failures. Reject input index `3` because timestamp `4` is below watermark `11`.
 
 ## Example 2
 
@@ -53,7 +62,7 @@ Output:
 ([(5, 'a', 1, 1), (10, 'b', 1, 0)], [2])
 ```
 
-**Explanation:** Timestamp 5 equals the watermark and is accepted; timestamp 4 is too old.
+**Explanation:** Timestamp `10` is accepted and sets the watermark to `10 - 5 = 5`. Timestamp `5` equals the watermark, so it is accepted. Timestamp `4` is below the watermark, so reject input index `2`. Device `a` has one failure in `[5, 10)`, and device `b` has one passing event in `[10, 15)`. List the summaries by window start.
 
 ## Constraints
 

@@ -36,7 +36,7 @@ Output:
 {'id': 'a', 'message': 'sensor too hot', 'code': 'X=7'}
 ```
 
-**Explanation:** Quoted whitespace stays inside a value; equals signs need no special treatment.
+**Explanation:** The line contains three fields. `id=a` gives value `a`. The quotes in `message="sensor too hot"` keep the spaces inside one value, then the enclosing quotes are removed. In `code=X=7`, the first `=` separates the key from the value, so the value is `X=7`.
 
 ## Example 2
 
@@ -52,7 +52,7 @@ Output:
 {'id': 'b', 'note': ''}
 ```
 
-**Explanation:** The last duplicate wins and quoted empty values are valid.
+**Explanation:** The first field sets `id` to `a`, and the second replaces it with `b` because the last duplicate wins. The field `note=""` is valid and gives an empty string. Return both keys with those final values.
 
 ## Constraints
 

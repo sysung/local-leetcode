@@ -34,7 +34,15 @@ Output:
 {'gpu.fan.rpm': 1200, 'gpu.temperature': 80, 'site': 'lab'}
 ```
 
-**Explanation:** Each dictionary edge contributes one path component.
+**Explanation:** Follow the nested keys to each value and join those keys with dots:
+
+```text
+gpu -> fan -> rpm       becomes gpu.fan.rpm = 1200
+gpu -> temperature      becomes gpu.temperature = 80
+site                    stays   site = 'lab'
+```
+
+The output contains one entry for each of these three values.
 
 ## Example 2
 
@@ -50,7 +58,7 @@ Output:
 {'healthy': True, 'reading': None}
 ```
 
-**Explanation:** Empty dictionaries contribute no leaves; booleans and None are preserved.
+**Explanation:** The empty dictionary under `gpu` contains no values, so it adds no output entry. `healthy` and `reading` already hold values rather than dictionaries. Keep `True` and `None` unchanged under their original keys.
 
 ## Constraints
 

@@ -35,7 +35,7 @@ Output:
 {'group': 'team-A', 'item': 'unit7', 'revision': 3, 'result': 'PASS', 'timestamp': 12}
 ```
 
-**Explanation:** Leading zeroes are accepted and removed by integer conversion.
+**Explanation:** The five fields are group `team-A`, item `unit7`, revision `003`, result `PASS`, and timestamp `0012`. The filename has the required lowercase `.zip` extension. Convert revision `003` to integer `3` and timestamp `0012` to integer `12`. Keep the other fields as strings.
 
 ## Example 2
 
@@ -51,7 +51,7 @@ Output:
 None
 ```
 
-**Explanation:** Result matching is case-sensitive.
+**Explanation:** The result field is `pass`, but only uppercase `PASS` or `FAIL` is valid. This makes the entire filename invalid, so return `None` rather than a partial dictionary.
 
 ## Constraints
 

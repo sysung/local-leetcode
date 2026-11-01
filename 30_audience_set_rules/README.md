@@ -34,6 +34,8 @@ Output:
 ['b']
 ```
 
+**Explanation:** Users `b` and `c` appear in both required groups and in the universe. User `a` is missing from the second group, and `d` is missing from the first. Exclude `c` because it is on the suppression list. Only `b` remains.
+
 ## Example 2
 
 Input (positional arguments):
@@ -47,6 +49,8 @@ Output:
 ```python
 ['a']
 ```
+
+**Explanation:** There are no required groups, so both distinct universe members, `a` and `b`, initially qualify. Duplicate `b` does not create another member. Excluding `b` leaves only `a`.
 
 ## Constraints
 

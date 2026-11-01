@@ -34,7 +34,7 @@ Output:
 ['extract', 'validate', 'publish']
 ```
 
-**Explanation:** Both transitions form one ordered path.
+**Explanation:** Start at `extract`, take the transition to `validate`, then take the transition to `publish`. Both transitions are used exactly once, producing `extract -> validate -> publish`.
 
 ## Example 2
 
@@ -50,7 +50,14 @@ Output:
 ['A', 'B', 'A', 'C', 'A']
 ```
 
-**Explanation:** Both cycles can be traversed; the trace visiting B first is lexicographically smaller.
+**Explanation:** Two complete traces are possible:
+
+```text
+A -> B -> A -> C -> A
+A -> C -> A -> B -> A
+```
+
+Each uses all four directed transitions exactly once. The first differing stage is `B` versus `C`, so the trace through `B` first is lexicographically smaller.
 
 ## Constraints
 

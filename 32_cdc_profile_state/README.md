@@ -35,6 +35,8 @@ Output:
 [('a', 2, 'new')]
 ```
 
+**Explanation:** Profile `a` has upserts at versions `2` and `1`. Version `2` wins, keeping value `new` even though the older update arrives afterward. Profile `b` has a delete at version `4`, which overrides the upsert at version `3`. Omit deleted profile `b`, leaving only `('a', 2, 'new')`.
+
 ## Example 2
 
 Input (positional arguments):
@@ -48,6 +50,8 @@ Output:
 ```python
 [('a', 1, 'Z')]
 ```
+
+**Explanation:** Profile `a` has two upserts at version `1`. Choose value `Z` because it is lexicographically greater than `A`. Profile `b` has an upsert and a delete at version `2`. The delete wins the version tie, so omit `b` from the live output.
 
 ## Constraints
 

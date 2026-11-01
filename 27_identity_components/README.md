@@ -30,7 +30,13 @@ Input:
 [('email:a', 'cookie:b'), ('customer:c', 'email:a'), ('orphan', 'orphan')]
 ```
 
-The links form these groups:
+Output:
+
+```python
+[('cookie:b', 'cookie:b'), ('customer:c', 'cookie:b'), ('email:a', 'cookie:b'), ('orphan', 'orphan')]
+```
+
+**Explanation:** The links form these groups:
 
 ```text
 cookie:b --- email:a --- customer:c
@@ -40,12 +46,6 @@ orphan  (self-link)
 
 The first three IDs are connected. Their smallest ID is `cookie:b`, so all three map to it. `orphan` only links to itself, so it maps to itself.
 
-Output:
-
-```python
-[('cookie:b', 'cookie:b'), ('customer:c', 'cookie:b'), ('email:a', 'cookie:b'), ('orphan', 'orphan')]
-```
-
 ## Example 2
 
 Input:
@@ -54,13 +54,13 @@ Input:
 [('z', 'y'), ('b', 'b'), ('a', 'a')]
 ```
 
-`z` and `y` are connected, so both map to `y`. The self-links put `a` and `b` in separate groups.
-
 Output:
 
 ```python
 [('a', 'a'), ('b', 'b'), ('y', 'y'), ('z', 'y')]
 ```
+
+**Explanation:** `z` and `y` are connected, so both map to `y`. The self-links put `a` and `b` in separate groups.
 
 ## Constraints
 

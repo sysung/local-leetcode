@@ -33,7 +33,7 @@ Output:
 [('ECC', 2), ('POWER', 1)]
 ```
 
-**Explanation:** ECC is most frequent; POWER precedes TEMP alphabetically for the tie.
+**Explanation:** The counts are `ECC: 2`, `TEMP: 1`, and `POWER: 1`. `ECC` ranks first because it occurs twice. `POWER` and `TEMP` tie, so `POWER` comes first alphabetically. With `k = 2`, return only `ECC` and `POWER`.
 
 ## Example 2
 
@@ -49,7 +49,7 @@ Output:
 [('A', 1), ('B', 1), ('Z', 1)]
 ```
 
-**Explanation:** All counts tie, and requesting more than the distinct count returns every code.
+**Explanation:** Each code occurs once, so order all three alphabetically as `A`, `B`, `Z`. Although `k = 5`, only three distinct codes exist. Return those three with count `1` each.
 
 ## Constraints
 

@@ -33,7 +33,7 @@ Output:
 18
 ```
 
-**Explanation:** Splitting into [7, 2, 5] and [10, 8] gives sums 14 and 18; a smaller maximum is impossible.
+**Explanation:** Split the loads into `[7, 2, 5]` and `[10, 8]`. Their sums are `14` and `18`, so the largest batch sum is `18`. A limit below `18` would force `10` and `8` into separate batches. The preceding loads sum to `14` and cannot join `10` under that limit, requiring a third batch. Since exactly two batches are allowed, return `18`.
 
 ## Example 2
 
@@ -49,7 +49,7 @@ Output:
 6
 ```
 
-**Explanation:** [1, 2, 3], [4], [5] achieve a maximum of 6.
+**Explanation:** One valid split is `[1, 2, 3]`, `[4]`, `[5]`, with sums `6`, `4`, and `5`. The largest sum is `6`. A limit below `6` would require at least four batches: `[1, 2]`, `[3]`, `[4]`, and `[5]`. Therefore, three batches cannot achieve a smaller maximum.
 
 ## Constraints
 

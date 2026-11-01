@@ -35,7 +35,7 @@ Output:
 'a/manifest.json'
 ```
 
-**Explanation:** A manifest outranks a summary, then the shallower manifest wins.
+**Explanation:** Both `z/deep/manifest.json` and `a/manifest.json` outrank `summary.txt` because filename priority comes first. Among the manifests, `a/manifest.json` has one directory component while `z/deep/manifest.json` has two. Choose the shallower path, `a/manifest.json`.
 
 ## Example 2
 
@@ -51,7 +51,7 @@ Output:
 'a/summary.txt'
 ```
 
-**Explanation:** Equal priority and depth are resolved by the full path.
+**Explanation:** Ignore `README.txt` because it is not a recognized filename. Both remaining paths name `summary.txt` and have one directory component. Break the tie by full-path string order, choosing `a/summary.txt` before `z/summary.txt`.
 
 ## Constraints
 

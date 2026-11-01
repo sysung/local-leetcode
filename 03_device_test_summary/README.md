@@ -35,7 +35,7 @@ Output:
 {'gpu': {'failures': 1, 'pass_rate': 0.5, 'total': 2}}
 ```
 
-**Explanation:** One of two tests passes, so the pass rate is 0.5.
+**Explanation:** Device `gpu` has two tests, one `PASS` and one `FAIL`. Its total is `2`, its failure count is `1`, and its pass rate is `1 / 2 = 0.5`.
 
 ## Example 2
 
@@ -52,7 +52,7 @@ Output:
  'b': {'failures': 0, 'pass_rate': 1.0, 'total': 1}}
 ```
 
-**Explanation:** Each device is counted independently.
+**Explanation:** Device `a` has one failed test, giving total `1`, failures `1`, and pass rate `0 / 1 = 0.0`. Device `b` has one passed test, giving total `1`, failures `0`, and pass rate `1 / 1 = 1.0`. Count each device separately.
 
 ## Constraints
 

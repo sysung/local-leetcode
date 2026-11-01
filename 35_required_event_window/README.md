@@ -35,6 +35,17 @@ Output:
 (2, 4)
 ```
 
+**Explanation:** Using zero-based indices, the relevant two-entry windows are:
+
+```text
+Index:  0      1      2    3     4
+Event:  view   noise  buy  view  buy
+                     [buy view]      [2, 4)
+                          [view buy] [3, 5)
+```
+
+Both contain one `view` and one `buy`. Their relative order does not matter. No one-entry window can contain both types, so length `2` is minimal. Choose the earlier window and return `(2, 4)`. The end index `4` is excluded.
+
 ## Example 2
 
 Input (positional arguments):
@@ -48,6 +59,8 @@ Output:
 ```python
 (0, 3)
 ```
+
+**Explanation:** The slice `events[0:3]` is `['view', 'buy', 'view']`. It contains the required two views and one buy in three entries. No shorter slice can hold all three required occurrences. The later qualifying slice `events[1:5]` has four entries because it includes `noise`, so return the half-open pair `(0, 3)`.
 
 ## Constraints
 

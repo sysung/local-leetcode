@@ -34,7 +34,7 @@ Output:
 [('b', 9), ('a', 2), ('c', 3)]
 ```
 
-**Explanation:** Updating b changes its value but keeps its first-seen position.
+**Explanation:** Start at `p1`, collecting `b = 1` and `a = 2` in that order. Follow its cursor to `p2`, where `b` changes to `9` and new ID `c` is appended with value `3`. Updating `b` preserves its first-seen position. The next cursor is `None`, so stop with ID order `b`, `a`, `c`.
 
 ## Example 2
 
@@ -50,7 +50,7 @@ Output:
 [('x', 1)]
 ```
 
-**Explanation:** An empty page does not terminate traversal.
+**Explanation:** Start at `p1`, which contains no items but points to `p2`. Continue to `p2` and collect `('x', 1)`. Its next cursor is `None`, so stop. An empty page alone does not end the cursor chain.
 
 ## Example 3
 

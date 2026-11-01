@@ -36,6 +36,14 @@ Output:
 {'p0': 6}
 ```
 
+**Explanation:** Partition `p0` starts at next offset `5`, meaning offsets below `5` are already committed. Offset `5` is completed, so advance to `6`. Offset `6` is missing, so stop there. Completed offsets `7` and `8` cannot bridge that gap.
+
+```text
+Offset:     5          6          7          8
+Status:  completed   missing   completed   completed
+                     ^ new next offset
+```
+
 ## Example 2
 
 Input (positional arguments):
@@ -49,6 +57,8 @@ Output:
 ```python
 {'a': 2, 'b': 11}
 ```
+
+**Explanation:** Partition `a` starts at `0`. Both `0` and `1` are completed, so advance to `2`, the first gap. Partition `b` starts at `10`. Offset `10` is completed, but `11` is missing, so stop at `11` despite completion `12`. Insert the result keys in alphabetical order, `a` before `b`.
 
 ## Constraints
 

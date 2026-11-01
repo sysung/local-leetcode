@@ -34,7 +34,18 @@ Output:
 [1.0, -1.0, -1.0, 3.0, 5.0, 6.0]
 ```
 
-**Explanation:** Each group of three contributes its middle reading.
+**Explanation:** Move a three-reading window one position at a time. Sort each window to identify its middle value:
+
+| Window | Sorted readings | Median |
+| --- | --- | --- |
+| `[1, 3, -1]` | `[-1, 1, 3]` | `1.0` |
+| `[3, -1, -3]` | `[-3, -1, 3]` | `-1.0` |
+| `[-1, -3, 5]` | `[-3, -1, 5]` | `-1.0` |
+| `[-3, 5, 3]` | `[-3, 3, 5]` | `3.0` |
+| `[5, 3, 6]` | `[3, 5, 6]` | `5.0` |
+| `[3, 6, 7]` | `[3, 6, 7]` | `6.0` |
+
+Return these medians in window order. Sorting here illustrates the median definition, not a required implementation.
 
 ## Example 2
 
@@ -50,7 +61,7 @@ Output:
 [15.0, 25.0, 35.0]
 ```
 
-**Explanation:** Each window has two readings; average them.
+**Explanation:** The windows are `[10, 20]`, `[20, 30]`, and `[30, 40]`. Each has two readings, so average them: `(10 + 20) / 2 = 15.0`, `(20 + 30) / 2 = 25.0`, and `(30 + 40) / 2 = 35.0`.
 
 ## Constraints
 

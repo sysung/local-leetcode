@@ -39,7 +39,17 @@ Output:
 ({'a': 'FAILED'}, [0, 4])
 ```
 
-**Explanation:** An invalid initial state is rejected; the later queue event starts the job.
+**Explanation:** Process the events for job `a` in arrival order:
+
+| Index | Incoming state | Decision | Accepted state afterward |
+| --- | --- | --- | --- |
+| 0 | `RUNNING` | Reject. A new job must start at `QUEUED`. | None |
+| 1 | `QUEUED` | Accept. | `QUEUED` |
+| 2 | `RUNNING` | Accept. | `RUNNING` |
+| 3 | `FAILED` | Accept. | `FAILED` |
+| 4 | `QUEUED` | Reject. `FAILED` is terminal. | `FAILED` |
+
+The final state is `FAILED`, and the rejected input indices are `[0, 4]`.
 
 ## Example 2
 
@@ -55,7 +65,7 @@ Output:
 ({'a': 'CANCELLED', 'b': 'RUNNING'}, [])
 ```
 
-**Explanation:** Each job has its own independent state.
+**Explanation:** Job `a` follows `QUEUED -> CANCELLED`, which is allowed. Independently, job `b` follows `QUEUED -> RUNNING`, which is also allowed. Their final states are `CANCELLED` and `RUNNING`. No events are rejected.
 
 ## Constraints
 

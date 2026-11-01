@@ -34,7 +34,16 @@ Output:
 (2, 4)
 ```
 
-**Explanation:** Indices 2 through 4 contain B, A, C. The equal-length later candidate loses the earliest-start tie.
+**Explanation:** Using zero-based indices, the shortest matching slices are:
+
+```text
+Index:  0  1  2  3  4  5
+Code:   A  X  B  A  C  B
+              [B  A  C]     indices 2 through 4
+                 [A  C  B]  indices 3 through 5
+```
+
+Both contain `A`, `B`, and `C` in three entries. No two-entry slice can contain all three distinct required codes. Choose `(2, 4)` because it starts earlier. Both returned endpoints are included.
 
 ## Example 2
 
@@ -50,7 +59,7 @@ Output:
 (1, 2)
 ```
 
-**Explanation:** Only one A is needed, so the redundant first A is removed.
+**Explanation:** The slice at indices `1` through `2` is `['A', 'B']`, which contains both required codes. Including the first `A` would make the slice longer without adding a required code. Return the inclusive indices `(1, 2)`.
 
 ## Constraints
 

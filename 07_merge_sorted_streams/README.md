@@ -34,7 +34,7 @@ Output:
 [(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd')]
 ```
 
-**Explanation:** Choose the next smallest timestamp across stream heads.
+**Explanation:** The first stream contains timestamps `1, 4`, and the second contains `2, 3`. In combined timestamp order, the events are `a` at `1`, `b` at `2`, `c` at `3`, and `d` at `4`. The displayed output lists the events yielded by the iterator.
 
 ## Example 2
 
@@ -50,7 +50,7 @@ Output:
 [(1, 'z'), (1, 'y'), (1, 'a')]
 ```
 
-**Explanation:** Stream zero wins both timestamp ties, even though its IDs sort later.
+**Explanation:** All events have timestamp `1`, so the stream index breaks the tie. Both events from stream `0` come before the event from stream `1`. Preserve stream `0`'s internal order, yielding `z`, then `y`, then `a`. Event IDs do not determine the order.
 
 ## Constraints
 

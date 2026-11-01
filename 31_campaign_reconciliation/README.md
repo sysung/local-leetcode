@@ -34,6 +34,16 @@ Output:
 [('c', 'e1', 2, 1), ('c', 'e2', 1, 0), ('c', 'e3', 0, 1)]
 ```
 
+**Explanation:** Count each event key on both sides, including repeated rows:
+
+| Event key | Source count | Destination count |
+| --- | --- | --- |
+| `('c', 'e1')` | 2 | 1 |
+| `('c', 'e2')` | 1 | 0 |
+| `('c', 'e3')` | 0 | 1 |
+
+All three keys have different counts, so report all three in event-key order.
+
 ## Example 2
 
 Input (positional arguments):
@@ -47,6 +57,8 @@ Output:
 ```python
 []
 ```
+
+**Explanation:** The key `('c', 'e')` appears twice in the source and twice in the destination. Duplicate rows count, but the counts agree at `2`. There is no discrepancy to report, so return `[]`.
 
 ## Constraints
 

@@ -35,6 +35,16 @@ Output:
 ['audience', 'audit', 'profiles', 'raw']
 ```
 
+**Explanation:** Starting at `raw`, follow its downstream edges:
+
+```text
+raw -> profiles -> audience
+  |
+  +--> audit
+```
+
+Include `raw` itself, its direct downstream datasets `profiles` and `audit`, and the indirectly reachable `audience`. Return the four distinct names in lexicographic order, rather than traversal order.
+
 ## Example 2
 
 Input (positional arguments):
@@ -48,6 +58,8 @@ Output:
 ```python
 ['a', 'b', 'c']
 ```
+
+**Explanation:** Starting at `b`, follow `b -> c -> a`. The edge `a -> b` returns to a dataset already reached, so it adds no new dataset. Include each of `a`, `b`, and `c` once and return them in sorted order.
 
 ## Constraints
 

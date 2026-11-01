@@ -34,7 +34,15 @@ Output:
 [(2, 'a', 2), (3, 'a', 2)]
 ```
 
-**Explanation:** The second failure meets the threshold; the following PASS still has two recent failures.
+**Explanation:** With window `5` and threshold `2`, the failure counts after each event are:
+
+| Timestamp | Event | Failures in the window | Alert? |
+| --- | --- | --- | --- |
+| 1 | `FAIL` | 1 | No |
+| 2 | `FAIL` | 2 | Yes |
+| 3 | `PASS` | 2 | Yes |
+
+The `PASS` does not add a failure, but both earlier failures are still in its window. Return alerts at timestamps `2` and `3`.
 
 ## Example 2
 
@@ -50,7 +58,7 @@ Output:
 []
 ```
 
-**Explanation:** At timestamp 5, timestamp 0 is excluded from the open-left window.
+**Explanation:** At timestamp `0`, there is only one failure. At timestamp `5`, the window includes times greater than `0` and at most `5`, so the failure at `0` has expired. The count is again `1`, below threshold `2`. No event produces an alert.
 
 ## Constraints
 

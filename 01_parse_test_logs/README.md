@@ -35,7 +35,7 @@ Output:
  {'device_id': 'gpu-2', 'status': 'FAIL', 'timestamp': 12}]
 ```
 
-**Explanation:** The malformed middle line is skipped; valid test results retain their order.
+**Explanation:** The first line becomes a record with timestamp `10`, device `gpu-1`, and status `PASS`. Skip `broken` because it does not contain three comma-separated fields. The last line becomes the `gpu-2` record with timestamp `12` and status `FAIL`. Keep the two valid records in input order.
 
 ## Example 2
 
@@ -51,7 +51,7 @@ Output:
 [{'device_id': 'board-1', 'status': 'FAIL', 'timestamp': 0}]
 ```
 
-**Explanation:** Whitespace is removed and timestamp zero is valid.
+**Explanation:** Remove the spaces around all three fields. Convert `0` to integer timestamp `0`, and keep `board-1` and `FAIL` as strings. Zero is a valid timestamp, so the record is included.
 
 ## Constraints
 

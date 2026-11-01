@@ -35,6 +35,8 @@ Output:
 [('u1', 'ads', 9, False), ('u1', 'email', 5, True)]
 ```
 
+**Explanation:** All three events occur at or before `as_of = 10`. For purpose `ads`, timestamp `9` is later than `4`, so keep the revoked state `False` at `9`. Purpose `email` has one eligible event, so keep its granted state `True` at `5`. Return `ads` before `email` in the sorted result.
+
 ## Example 2
 
 Input (positional arguments):
@@ -48,6 +50,8 @@ Output:
 ```python
 [('u1', 'ads', 7, False)]
 ```
+
+**Explanation:** Both events refer to the same user and purpose at timestamp `7`, which is eligible at `as_of = 7`. Their timestamps tie but their consent values disagree. Revocation wins regardless of input order, so keep the event with `False`.
 
 ## Constraints
 

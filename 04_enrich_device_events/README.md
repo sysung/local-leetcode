@@ -35,7 +35,7 @@ Output:
  {'device_id': 'x', 'model': None, 'site': None, 'value': 8}]
 ```
 
-**Explanation:** The known device receives metadata; the unknown device remains in the output.
+**Explanation:** Device `a` matches the metadata record, so its event receives model `GPU` and site `lab`. Device `x` has no metadata, so both fields become `None`. Preserve the values `7` and `8` and the original event order.
 
 ## Example 2
 
@@ -53,7 +53,7 @@ Output:
 [{'device_id': 'a', 'model': 'new', 'site': 'two'}]
 ```
 
-**Explanation:** The last metadata record wins.
+**Explanation:** The metadata contains two records for device `a`. Use the last one, with model `new` and site `two`, to enrich the event. The earlier metadata record is ignored.
 
 ## Constraints
 

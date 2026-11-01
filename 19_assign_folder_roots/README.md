@@ -34,7 +34,7 @@ Output:
 {'a/sub/x.txt': 'a/sub', 'a/y.txt': 'a', 'b/z.txt': ''}
 ```
 
-**Explanation:** Each measurement uses the deepest enclosing root.
+**Explanation:** The manifests define roots `''`, `a`, and `a/sub`. Measurement `a/sub/x.txt` belongs to all three, so choose the deepest root, `a/sub`. For `a/y.txt`, choose `a`. Measurement `b/z.txt` belongs only to the archive root, represented by the empty string.
 
 ## Example 2
 
@@ -50,7 +50,7 @@ Output:
 {'run/x.txt': 'run', 'runner/x.txt': None}
 ```
 
-**Explanation:** A string prefix alone does not establish directory ownership.
+**Explanation:** The manifest defines root `run`. Measurement `run/x.txt` is inside that directory, so it maps to `run`. Measurement `runner/x.txt` is in a different directory. Sharing the letters `run` is not enough, so it maps to `None`.
 
 ## Constraints
 

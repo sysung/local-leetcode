@@ -34,7 +34,7 @@ Output:
 ['extract', 'transform', 'publish']
 ```
 
-**Explanation:** Each prerequisite executes before its dependent stage.
+**Explanation:** `extract` has no prerequisites, so it runs first. `transform` can then run because `extract` is complete. Finally, `publish` can run because `transform` is complete. The dependency chain is `extract -> transform -> publish`.
 
 ## Example 2
 
@@ -50,7 +50,7 @@ Output:
 ['a', 'b', 'c', 'z']
 ```
 
-**Explanation:** Prerequisite-only task a is included; b becomes available before c is selected.
+**Explanation:** Initially, `a`, `c`, and `z` are available. Include `a` even though it appears only as a prerequisite. Choose `a` alphabetically, which makes `b` available. Now choose `b` before `c` and `z`, then finish with `c` and `z`.
 
 ## Constraints
 

@@ -35,6 +35,8 @@ Output:
 [('c1', 'new')]
 ```
 
+**Explanation:** Conversion `c1` occurs at timestamp `10`, so lookback `5` gives the inclusive eligible interval `[5, 10]`. Campaign `old` at `1` is too early, and campaign `future` at `12` is after the conversion. Campaign `new` at `8` is the only eligible touch, so it receives credit.
+
 ## Example 2
 
 Input (positional arguments):
@@ -48,6 +50,8 @@ Output:
 ```python
 [('c1', 'a'), ('c2', None)]
 ```
+
+**Explanation:** For conversion `c1`, both touches belong to user `u` and occur at `7`, the included lower boundary of `[7, 10]`. Their timestamps tie, so choose campaign `a` before `z` lexicographically. Conversion `c2` belongs to user `missing`, who has no touches, so it maps to `None`. Sort the output by conversion ID.
 
 ## Constraints
 

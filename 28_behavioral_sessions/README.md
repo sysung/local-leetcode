@@ -34,6 +34,8 @@ Output:
 [('u', 1, 0, 5, 2), ('u', 2, 11, 11, 1)]
 ```
 
+**Explanation:** The gap from timestamp `0` to `5` is exactly timeout `5`, so both events stay in session `1`. Its start is `0`, its end is `5`, and it contains two events. The next gap is `11 - 5 = 6`, greater than the timeout, so timestamp `11` starts session `2` with one event.
+
 ## Example 2
 
 Input (positional arguments):
@@ -47,6 +49,8 @@ Output:
 ```python
 [('a', 1, 1, 9, 2), ('b', 1, 4, 4, 1)]
 ```
+
+**Explanation:** For user `a`, process timestamps `1` and `9` in that order even though the input lists them in reverse. Their gap is `8`, within timeout `10`, so they form one session with two events. User `b` has one event at `4` and gets a separate session numbered `1`. Sort the result by user, placing `a` before `b`.
 
 ## Constraints
 

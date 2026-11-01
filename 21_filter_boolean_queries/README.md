@@ -63,7 +63,7 @@ Output:
 [2]
 ```
 
-**Explanation:** The parentheses make NOT apply to the entire disjunction.
+**Explanation:** The parentheses group `a | b` before NOT is applied. Record `0` contains `a`, so the grouped expression is true and NOT makes it false. Record `1` contains `b` and also fails after NOT. Record `2` contains neither label, so `a | b` is false and NOT makes it true. Only index `2` matches.
 
 ## Example 3
 

@@ -32,7 +32,7 @@ Output:
 [(1, 8)]
 ```
 
-**Explanation:** The overlapping intervals form one connected session.
+**Explanation:** In start-time order, the intervals are `(1, 4)`, `(3, 6)`, and `(5, 8)`. The first two overlap and cover `(1, 6)`. That interval overlaps `(5, 8)`, so all three merge into `(1, 8)`.
 
 ## Example 2
 
@@ -48,7 +48,7 @@ Output:
 [(1, 3), (5, 7)]
 ```
 
-**Explanation:** The first two intervals touch; the gap before 5 remains.
+**Explanation:** Intervals `(1, 2)` and `(2, 3)` touch at `2`, so they merge into `(1, 3)`. There is a gap between `3` and `5`, so `(5, 7)` remains a separate interval.
 
 ## Constraints
 

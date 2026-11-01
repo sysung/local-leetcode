@@ -35,7 +35,7 @@ Output:
 [{'item_id': 'a', 'timestamp': 0, 'status': 'PASS'}]
 ```
 
-**Explanation:** Legacy names map to the canonical fields.
+**Explanation:** There are no preferred keys, so use the aliases: `id` supplies `item_id = 'a'`, `time` supplies `timestamp = 0`, and `result` supplies `status = 'PASS'`. Preserve zero as a value. Discard `extra` because the output contains only the three specified fields.
 
 ## Example 2
 
@@ -51,7 +51,7 @@ Output:
 [{'item_id': None, 'timestamp': None, 'status': ''}]
 ```
 
-**Explanation:** Presence takes precedence over truthiness.
+**Explanation:** The `item_id` key exists, so keep its value `None` instead of using `id = 'fallback'`. The `status` key also exists, so keep the empty string instead of `result = 'PASS'`. Neither `timestamp` nor `time` exists, so the output timestamp is `None`.
 
 ## Constraints
 

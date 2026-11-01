@@ -34,7 +34,17 @@ Output:
 2
 ```
 
-**Explanation:** At time 4 the first job ends as the third starts, so the peak stays at two.
+**Explanation:** The number of running jobs changes as follows:
+
+```text
+Time range     Running jobs             Count
+[0, 2)         (0, 4)                      1
+[2, 4)         (0, 4), (2, 5)              2
+[4, 5)         (2, 5), (4, 7)              2
+[5, 7)         (4, 7)                      1
+```
+
+At time `4`, the first job has ended when the third starts. They do not overlap, so the maximum count is `2`, not `3`.
 
 ## Example 2
 
@@ -50,7 +60,7 @@ Output:
 2
 ```
 
-**Explanation:** Identical nonempty intervals count twice; the zero-duration interval contributes nothing.
+**Explanation:** The two `(1, 3)` entries represent separate jobs, so both run during `[1, 3)`. The job `(2, 2)` has zero duration and never counts as running. The maximum is therefore `2`.
 
 ## Constraints
 

@@ -36,7 +36,7 @@ Output:
  {'event_id': 'b', 'payload': 'new', 'timestamp': 2}]
 ```
 
-**Explanation:** Event b keeps its newest record; a precedes b in the output.
+**Explanation:** ID `b` appears at timestamps `1` and `2`. Keep its timestamp-`2` record, including payload `new`. ID `a` appears once, so keep that record too. Sort the selected records by ID, placing `a` before `b`.
 
 ## Example 2
 
@@ -53,7 +53,7 @@ Output:
 [{'event_id': 'a', 'payload': 'last', 'timestamp': 4}]
 ```
 
-**Explanation:** The last occurrence wins when timestamps are equal.
+**Explanation:** Both records have ID `a` and timestamp `4`. The timestamps tie, so keep the later input record with payload `last`. Only one record is returned for that ID.
 
 ## Constraints
 
