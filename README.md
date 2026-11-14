@@ -5,7 +5,7 @@ updated: 2026-11-14
 ---
 # Local LeetCode
 
-34 standalone Python exercises, plus two curated Medium/Hard interview routes.
+20 standalone Medium/Hard Python exercises, plus two curated Medium/Hard interview routes.
 
 ## Choose a route
 

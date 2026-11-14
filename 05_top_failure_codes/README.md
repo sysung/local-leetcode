@@ -1,12 +1,12 @@
 ---
 type: coding-practice
-difficulty: easy
+difficulty: medium
 created: 2026-09-30
 updated: 2026-10-05
 ---
 # Rank the Most Frequent Failure Codes
 
-**Difficulty:** Easy  
+**Difficulty:** Medium
 **DSA skills:** Frequency maps, custom sorting
 
 ## Problem
@@ -18,6 +18,10 @@ Return up to `k` `(code, count)` pairs, ordered from most frequent to least freq
 - Break frequency ties alphabetically by code.
 - If fewer than `k` distinct codes exist, return them all.
 - Return `[]` if `k <= 0`.
+
+## Complexity requirement
+
+Let n be the number of input codes, u the number of distinct codes, and h = min(max(k, 0), u). Use expected O(n + u log(h + 1) + h log(h + 1)) time and O(u + h) space. Select with a bounded heap; do not sort all u distinct codes when k is small. Include deterministic ordering of the selected output in your analysis.
 
 ## Example 1
 
@@ -66,3 +70,9 @@ python3 -m unittest -v test_case.py
 ```
 
 Tests exercise `main.py` only. The starter intentionally raises `NotImplementedError`. Check `solution.py` after your attempt for the complete algorithm and complexity analysis.
+
+## Interview follow-ups
+
+- Audience membership uses sets: intersect required groups with a universe, then subtract exclusions. No required groups means the universe; an empty required group means no audience. Duplicate IDs do not matter.
+- Campaign reconciliation uses multisets: compare counts per `(campaign_id, event_id)` across source and destination and report differing counts, including missing keys as zero. Set comparison would hide duplicate delivery.
+- Neither follow-up is part of `top_failure_codes`; explain the different semantics rather than adding unrelated functions to this exercise.

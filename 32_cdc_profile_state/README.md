@@ -69,3 +69,11 @@ python3 main.py
 ```
 
 Tests import only `main.py`; the starter intentionally raises `NotImplementedError`. The sample harness also raises until you implement the function. Compare with `solution.py` after your attempt. Explain your algorithm, boundary cases, and time/space complexity aloud.
+
+## Interview follow-ups: one reduction, different policies
+
+These are discussion variants, not changes to `materialize_profiles` or its tests.
+
+1. **Latest event per ID:** select greatest timestamp, keep the last input occurrence on a tie, preserve its payload, and sort by ID. This policy depends on arrival order; CDC tie resolution does not.
+2. **Consent as of activation:** for each `(user, purpose)`, ignore events later than `as_of`; select the greatest eligible timestamp, with revocation winning equal-time disagreement. Include revoked states and sort by key. This filters by event time; it does not model tombstone resurrection.
+3. Explain which comparator/state changes for each variant. Timestamp eligibility, arrival-order ties, and deletion precedence are different requirements even though all use keyed reduction.
