@@ -1,79 +1,53 @@
-# NVIDIA marketing data engineer interview preparation
+# NVIDIA marketing senior data engineer: ten Medium/Hard questions
 
-Researched November 1, 2026. This guide targets the Senior Data Engineer role in Digital Marketing Operations described in `../Job Description 3 - Marketing.md`.
+Reviewed November 14, 2026. Target: [NVIDIA job 893398235048](https://jobs.nvidia.com/careers/job/893398235048), described by the user as a senior data engineer role in marketing.
 
-## What the evidence supports
+## Evidence and priorities
 
-[NVIDIA's hiring guide](https://www.nvidia.com/en-us/about-nvidia/careers/how-we-hire/) says technical candidates may receive a coding exercise, usually through HackerRank. It does not publish a question bank or a team-specific interview format.
+[NVIDIA's hiring guide](https://www.nvidia.com/en-us/about-nvidia/careers/how-we-hire/) says technical candidates may receive a coding exercise, usually through HackerRank. It does not provide a marketing-team question bank. The live job page did not yield reliable role text. The previous guide referenced an external job-description file that is absent from this checkout; its detailed requirements are therefore not treated as verified facts.
 
-The supplied job description explicitly calls for Python, strong SQL, Spark, batch and streaming pipelines, consent propagation, identity resolution, idempotency, replay, and late-arriving data. The [linked job page](https://jobs.nvidia.com/careers/job/893398235048) was accessible, but its browser extraction did not provide a reliable copy of the role text. The supplied document is the source for the role-specific requirements here.
+You reported that earlier interviews emphasized real-world scenarios with a DSA twist. The marketing examples here follow that experience and the existing exercise contracts. Consent, identity, attribution and streaming scenarios are preparation choices, not confirmed requirements of this specific posting. None of these ten questions is claimed to be an actual NVIDIA interview question.
 
-A [public NVIDIA senior data engineer discussion](https://www.reddit.com/r/dataengineeringjobs/comments/1lqzou4/interview_advice_nvidia_senior_data_engineer/) includes one candidate's report that their screening focused on experience and project scenarios. Another commenter recommends SQL and dimensional modeling. These are unverified anecdotes across unspecified teams. They do not establish what this interview will contain.
+This route emphasizes keyed state, deterministic precedence, graphs, sorted-time processing, gaps, event-time aggregation and sliding windows. Official LeetCode counterparts provide a comparison; local contracts and difficulty labels remain authoritative for local exercises.
 
-The practice priorities below are my inference from the supplied role, rather than reported NVIDIA questions. The ten new exercises are original preparation material.
+## Practice in this order
 
-## What to prioritize
+Each row is one required attempt. Do the selected version; the counterpart explains the tradeoff rather than adding homework.
 
-| Priority | Coding pattern | Why prepare it for this role |
+| # | Selected question | Difficulty | Main theme and marketing application | Local versus official LeetCode: which to do and why |
+| --- | --- | --- | --- | --- |
+| 1 | [LC347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) | Medium, official | Frequency map and selection; rank campaign engagement categories. | Choose official over [local 05](../05_top_failure_codes/README.md) (Easy): its better-than-O(n log n) follow-up demands more algorithmic depth. Local's deterministic ties can be discussed afterward. |
+| 2 | [Local 26. Latest consent snapshot](../26_latest_consent_snapshot/README.md) | Medium, local | Composite keyed reduction; determine eligible consent at activation time. | Choose local over [LC981. Time Based Key-Value Store](https://leetcode.com/problems/time-based-key-value-store/) (Medium) for batch as-of filtering and revocation-wins ties. LC981 has deeper online indexing; it does not supply these consent rules. |
+| 3 | [Local 32. CDC profile state](../32_cdc_profile_state/README.md) | Medium, local | Version ordering and tombstones; materialize replayed customer updates safely. | Choose local over LC981 (linked above). This is a partial analogue: keyed history is shared, but the challenge here is state reduction and deletion precedence, not binary search. Tombstones prevent older replayed upserts from resurrecting a profile. |
+| 4 | [Local 27. Identity components](../27_identity_components/README.md) | Medium, local | Undirected components; resolve linked customer identifiers. | Choose local over [LC721. Accounts Merge](https://leetcode.com/problems/accounts-merge/) (Medium). Same graph/union-find core; canonical ID selection makes the result directly usable in an identity mapping. LC721 adds email/account packaging, not a fundamentally different graph invariant. |
+| 5 | [Local 28. Behavioral sessions](../28_behavioral_sessions/README.md) | Medium, local | Per-user sorting and adjacent-gap scan; group behavioral activity. | Choose local over [LC56. Merge Intervals](https://leetcode.com/problems/merge-intervals/) (Medium) for marketing applicability. They share sorted scans, but sessionization is not interval union: compare each event with its predecessor and define timeout equality. |
+| 6 | [Local 29. Last-touch attribution](../29_last_touch_attribution/README.md) | Medium, local | Per-key temporal lookup; credit each conversion to an eligible campaign. | Choose local over LC981 for lookback boundaries, unattributed conversions and deterministic campaign ties. LC981 adds an online API; local adds business rules around predecessor lookup. |
+| 7 | [Local 33. Completed offsets](../33_completed_offset_prefix/README.md) | Medium, local | Sets and contiguous-prefix advancement; avoid committing past ingestion gaps. | Choose local over [LC1656. Design an Ordered Stream](https://leetcode.com/problems/design-an-ordered-stream/) (Easy). Local adds partitions, duplicate completions and existing checkpoints, making the data-processing contract deeper. LC1656 is comparison only, not assigned practice. |
+| 8 | [Local 10. ETL dependency order](../10_order_etl_tasks/README.md) | Medium, local | Topological sort, heap and cycle detection; sequence ingestion and audience publication. | Choose local over [LC210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) (Medium). Deterministic ready-task ordering adds complexity beyond any valid topological order. |
+| 9 | [Local 15. Event-time windows](../15_event_time_windows/README.md) | Hard, local | Heap-based finalization and incremental aggregation; process late engagement events. | Choose local over [LC239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/) (Hard) for streaming applicability. This is a contrast, not equivalence: LC239 teaches deque-based extrema in fixed index windows; local teaches watermark lifecycle and out-of-order arrivals. Neither subsumes the other. |
+| 10 | [Local 35. Required event window](../35_required_event_window/README.md) | Hard, local | Minimum multiset sliding window; find the shortest span containing required behaviors. | Choose local over [LC76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) (Hard). Equivalent count/window invariant, with event types and explicit index ties. Required behaviors can occur in any order; this is not an ordered funnel. |
+
+## Correctness, complexity and realistic extensions
+
+Use n for input rows, u for unique keys, V/E for graph vertices/edges, p for partitions, and b for buffered open window/device groups. Bounds include sorted output where required and assume expected hash-map operations.
+
+| Pick | Explain or test | Complexity target and interview extension |
 | --- | --- | --- |
-| Highest | Hash maps, sets, grouping, deduplication | Customer events, audience membership, reconciliation, and replay |
-| Highest | Sorting, latest-record selection, deterministic ties | Consent changes, CDC, late arrivals, and reproducible data products |
-| Highest | SQL joins, aggregation, window functions | The role explicitly requires strong SQL and analytical consumption |
-| High | Timestamp boundaries, sessionization, binary search | Behavioral events and campaign attribution |
-| High | Graph traversal and connected components | Identity resolution and downstream lineage |
-| High | Sliding windows and frequency counts | Behavioral sequences and bounded event analysis |
-| Useful review | Heaps, top-k, interval merging, topological sorting | Stream merges, campaign rankings, scheduling, and pipeline dependencies |
+| 1 | k near the number of categories; heap versus buckets. | O(n + u log(k+1)) with heap selection or O(n+u) buckets; discuss exact versus approximate heavy hitters and skew. |
+| 2 | Future events, equal-time disagreement, exact duplicates, empty input. | O(n + u log u) time, O(u) state. Explain how a later revocation reaches downstream audiences; this toy function alone does not implement propagation. |
+| 3 | Delete/upsert ties, stale replay, empty-string values, later recreation. | O(n + u log u) time, O(u) state. Explain why deletion versions must survive replay and how retention interacts with backfills. |
+| 4 | Self-links, repeated/reversed edges, long chains and disconnected groups. | Iterative traversal O(V+E), plus O(V log V) output sorting; O(V+E) space. Discuss mistaken merges and why splitting is harder than unioning. |
+| 5 | Gap equal to timeout, interleaved users, duplicates and out-of-order input. | O(n log n) time and O(n) space. Explain how late events can merge previously emitted sessions. |
+| 6 | Touch at either lookback boundary, tied campaigns, absent touches, repeated touches. | Sort/index in O(n log n); each conversion lookup O(log m) within that user's m touches, plus output sorting. O(n) index/output space. Discuss corrections after late touch arrival. |
+| 7 | Gap at checkpoint, completions below it, duplicates and independent partitions. | Expected O(n + p log p) time and O(n+p) space. Explain that prefix tracking alone does not guarantee exactly-once writes; coordinate checkpointing with sink effects. |
+| 8 | Cycles, self-dependencies, duplicate edges and prerequisite-only tasks. | O(E + V log V) time and O(V+E) space. Distinguish retry state from dependency ordering. |
+| 9 | Timestamp equal to watermark, rejected late events, final flush, invalid parameters. | Heap operations O(n log(b+1)), plus O(s log s) sorting for s output summaries; O(b) live state and O(n) worst-case returned data. Discuss allowed lateness and state retention without claiming the state is universally bounded. |
+| 10 | Repeated requirements, irrelevant events, missing types, empty target and earliest ties. | Expected O(n+r) time and O(d) count state for r required entries and d required types. For ordered funnel rules, the invariant changes; see the catalog's distinction from local 25. |
 
-Start with clear easy and medium solutions. Explain correctness, ties, empty input, duplicate events, complexity, and why inputs remain unchanged. Practice one harder sliding-window problem after those fundamentals.
+## SQL and senior discussion
 
-Generic company lists often mix hardware, CUDA, and software roles. This marketing data role gives stronger grounds to prioritize SQL and data processing than CUDA or C++ puzzles. Exact interview difficulty remains unknown.
+These remain separate from the ten coding assignments. Practice deterministic latest-consent selection with `ROW_NUMBER`, audience anti-joins, duplicate-preserving campaign reconciliation, sessionization with `LAG`, and last-touch attribution with an outer join that retains unattributed conversions. Review join multiplicity, `NULL` behavior and window frames using the [PostgreSQL window-function tutorial](https://www.postgresql.org/docs/current/tutorial-window.html).
 
-## Ten local exercises
+After coding, explain partition keys, skew, late data, retry behavior, replay and backfill corrections. Prepare concrete examples from your own work for an incident, a migration, and a reliability-versus-cost decision. Simplified consent rules are exercise contracts; identity components, offset prefixes and graph scope do not by themselves implement production privacy or delivery guarantees.
 
-| Problem | Practice task | Main pattern | Interview follow-up |
-| --- | --- | --- | --- |
-| 26 | Latest consent snapshot | Map with deterministic latest-record selection | How does a revocation propagate? |
-| 27 | Identity components | Connected components | What happens after a mistaken identity merge? |
-| 28 | Behavioral sessions | Grouping and sorted scans | How do late events change sessions? |
-| 29 | Last-touch attribution | Ordered lookup by customer and time | How do you handle attribution corrections? |
-| 30 | Audience membership | Set intersection and exclusion | How do you avoid activating stale membership? |
-| 31 | Campaign reconciliation | Multiset counts and full comparison | How do you distinguish missing data from duplicates? |
-| 32 | CDC materialization | Versioned keyed state | Why must deletion versions survive replay? |
-| 33 | Safe offset advancement | Contiguous prefix tracking | When is acknowledging a message safe? |
-| 34 | Erasure lineage | Directed graph reachability | How do you prove every destination completed deletion? |
-| 35 | Minimum event window | Sliding window with frequency counts | How does bounded stream state change the solution? |
-
-Each folder contains a problem statement, an unfinished `main.py`, visible `test_case.py` tests, and a reference `solution.py`. Run the tests against your own implementation before opening the reference.
-
-The tuple records and simplified rules make each exercise solvable in one sitting. The consent rules are practice contracts, not legal guidance. Graph reachability alone does not implement an erasure workflow, and offset tracking alone does not guarantee exactly-once delivery.
-
-## Related LeetCode practice
-
-These are pattern matches, not claims that NVIDIA asks these exact questions.
-
-- [721. Accounts Merge](https://leetcode.com/problems/accounts-merge/) practices connected components for identity resolution.
-- [76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) practices windows with duplicate requirements.
-- [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) practices frequency aggregation and selection. Revisit local problem 05 as well.
-- [56. Merge Intervals](https://leetcode.com/problems/merge-intervals/) practices interval boundaries. Compare its closed intervals with the contracts in local problems 09 and 24.
-- [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) practices dependency ordering. Revisit local problem 10.
-
-## Prepare SQL alongside Python
-
-These ten additions follow this repository's Python format. They do not replace SQL preparation. Use the same small datasets to practice these separate SQL prompts.
-
-1. Select the latest consent per customer and purpose with `ROW_NUMBER`, including deterministic ties.
-2. Count distinct activated customers per campaign and day without multiplying rows through a one-to-many join.
-3. Find customers missing from an activation destination using an anti-join. Explain `NULL` behavior.
-4. Sessionize events with `LAG`, a new-session flag, and a cumulative sum. Define the frame explicitly.
-5. Attribute each conversion to its latest eligible touch. Preserve unattributed conversions with an outer join.
-6. Reconcile source and destination event multiplicities rather than comparing only distinct IDs.
-
-The [PostgreSQL window-function tutorial](https://www.postgresql.org/docs/current/tutorial-window.html) explains partitions, ordering, and default frames. Pay attention to tied ordering values and cumulative calculations.
-
-## Prepare senior-level follow-ups
-
-After solving each Python problem, explain how it changes when the data no longer fits in memory. Cover partition keys, skew, incremental updates, retries, schema changes, and late arrivals where relevant.
-
-Prepare concrete examples from your own work for an incident investigation, a safe backfill, a schema migration, and a reliability-versus-cost decision. For this role, also prepare a design discussion about consent changes reaching downstream audience services and activation platforms.
-
-A useful practice sequence is 26, 30, 31, 32, 28, 29, 33, 27, 34, then 35. Start with state selection and sets, then move to time, graphs, and windows. Use a 35-minute coding limit as a practice choice, followed by a correctness and complexity explanation. This timing is not a verified NVIDIA interview format.
+See the [catalog](practice_catalog.md) for the shared practice procedure, overlap analysis, and the Easy exercises deliberately excluded from these routes.
