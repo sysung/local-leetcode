@@ -2,23 +2,30 @@
 type: coding-practice
 difficulty: medium
 created: 2026-09-30
-updated: 2026-10-05
+updated: 2026-11-15
 ---
 # Merge Sorted Hardware Event Streams
 
-**Difficulty:** Medium  
-**DSA skills:** Min-heaps, k-way merging, iterators
+**Difficulty:** Medium
+**DSA skills:** Min-heaps, k-way merging, list indices
 
 ## Problem
 
-You are given a list of streams, `streams`. Each stream contains `(timestamp, event_id)` tuples sorted by timestamp.
+You are given `streams`, a list of lists. Each inner list contains `(timestamp, event_id)` tuples sorted by timestamp.
 
-Return an iterator that yields all events in timestamp order.
+Return a new list containing all events in timestamp order.
+
+```python
+def merge_streams(streams: list[list[tuple[int, str]]]) -> list[tuple[int, str]]:
+    ...
+```
 
 - For equal timestamps, choose the event from the lower-indexed input stream first.
 - Preserve each stream's internal order; event IDs do not affect sorting.
-- Read streams incrementally, buffering at most one event per stream.
-- Consuming input iterators is allowed, but do not modify input collections.
+- Inputs and output are ordinary lists; no generators or iterator behavior is required.
+- Do not modify the input lists. Empty input, or only empty inner lists, returns `[]`.
+- Use a heap to merge the already sorted lists, keeping at most one candidate per nonempty list.
+- Target O(s + n log(s + 1)) time for s lists and n total events. Heap storage is O(s); the returned list adds O(n), so total extra space is O(s + n).
 
 ## Example 1
 
@@ -34,7 +41,7 @@ Output:
 [(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd')]
 ```
 
-**Explanation:** The first stream contains timestamps `1, 4`, and the second contains `2, 3`. In combined timestamp order, the events are `a` at `1`, `b` at `2`, `c` at `3`, and `d` at `4`. The displayed output lists the events yielded by the iterator.
+**Explanation:** The first stream contains timestamps `1, 4`, and the second contains `2, 3`. In combined timestamp order, the events are `a` at `1`, `b` at `2`, `c` at `3`, and `d` at `4`. Return these events together in a list.
 
 ## Example 2
 
@@ -50,7 +57,7 @@ Output:
 [(1, 'z'), (1, 'y'), (1, 'a')]
 ```
 
-**Explanation:** All events have timestamp `1`, so the stream index breaks the tie. Both events from stream `0` come before the event from stream `1`. Preserve stream `0`'s internal order, yielding `z`, then `y`, then `a`. Event IDs do not determine the order.
+**Explanation:** All events have timestamp `1`, so the stream index breaks the tie. Both events from stream `0` come before the event from stream `1`. Preserve stream `0`'s internal order: `z`, then `y`, then `a`. Event IDs do not determine the order.
 
 ## Constraints
 
@@ -66,4 +73,4 @@ Fill in `main.py`, then run from this problem's folder:
 python3 -m unittest -v test_case.py
 ```
 
-Tests exercise `main.py` only. The starter intentionally raises `NotImplementedError`. Check `solution.py` after your attempt for the complete algorithm and complexity analysis.
+Tests exercise `main.py` only. An unfinished implementation may fail until you complete it. Check `solution.py` after your attempt for the complete algorithm and complexity analysis.

@@ -7,7 +7,7 @@ Relevance is a preparation judgment based on the user's roles and interview expe
 | Exercise | Difficulty | Theme | Why retain it |
 | --- | --- | --- | --- |
 | [05](../05_top_failure_codes/README.md) | Medium | Bounded top-k selection | Upgraded from Easy: select with a heap; deterministic ties. Audience sets and multiset reconciliation become discussion follow-ups. |
-| [07](../07_merge_sorted_streams/README.md) | Medium | K-way iterator merge | Bounded buffering and stable ties; directly transferable to event feeds. |
+| [07](../07_merge_sorted_streams/README.md) | Medium | K-way sorted-list merge | Ordinary lists, position tracking and stable timestamp ties; heap merging remains the core skill. |
 | [08](../08_rolling_failure_alerts/README.md) | Medium | Rolling per-key counts | Time-based eviction and threshold emission; distinct from sessionization. |
 | [09](../09_merge_test_intervals/README.md) | Medium | Interval union | Merge overlapping/touching intervals; does not count concurrency. |
 | [10](../10_order_etl_tasks/README.md) | Medium | Topological ordering | Cycle detection and deterministic ready-task selection. |
