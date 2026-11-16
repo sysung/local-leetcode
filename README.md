@@ -10,7 +10,7 @@ updated: 2026-11-14
 ## Choose a route
 
 - [Waymo data engineering](docs/waymo_interview_prep.md)
-- [NVIDIA marketing data engineering](docs/marketing_interview_prep.md)
+- [NVIDIA marketing data engineering](docs/nvidia_interview_prep.md)
 - [Full exercise catalog and overlap analysis](docs/practice_catalog.md)
 
 ## Setup and practice

@@ -2,7 +2,7 @@
 
 Reviewed November 14, 2026. The bank now contains 20 Medium/Hard exercises: 17 retained or upgraded questions and three additions. Folder IDs stay stable. The two role guides each assign ten questions; shared questions need one implementation and role-specific discussion.
 
-Relevance is a preparation judgment based on the user's roles and interview experience, not a verified team requirement. Local difficulty comes from each README. The [Waymo route](waymo_interview_prep.md) and [NVIDIA route](marketing_interview_prep.md) own the role-specific selections, official LeetCode comparisons and complexity discussion.
+Relevance is a preparation judgment based on the user's roles and interview experience, not a verified team requirement. Local difficulty comes from each README. The [Waymo route](waymo_interview_prep.md) and [NVIDIA route](nvidia_interview_prep.md) own the role-specific selections, official LeetCode comparisons and complexity discussion.
 
 | Exercise | Difficulty | Theme | Why retain it |
 | --- | --- | --- | --- |
