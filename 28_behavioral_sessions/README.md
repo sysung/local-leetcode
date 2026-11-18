@@ -11,14 +11,12 @@ updated: 2026-11-01
 
 ## Problem
 
-A behavioral analytics job groups each user's page and product events into inactivity sessions.
+Implement `sessionize(events, timeout)` to group each user's page and product events into sessions based on the gaps between events.
 
-Implement `sessionize(events, timeout)`.
-
-- `events` is a list of `(user_id, timestamp, event_id)` tuples. User IDs and event IDs are nonempty strings. Timestamps are nonnegative integers. `timeout` is a nonnegative integer in the same time unit.
-- Process each user's events by `(timestamp, event_id)`. A gap strictly greater than `timeout` from that user's preceding event starts a new session. A gap equal to `timeout` stays in the same session.
-- Number sessions from 1 independently for each user. Return `(user_id, session_number, start_timestamp, end_timestamp, event_count)` tuples sorted by user, then session number.
-- Session endpoints are the first and last event timestamps, both inclusive. Count every input row, including exact duplicates. Empty input returns `[]`.
+- **Process each user's events in timestamp order. If two events have the same timestamp, sort them by `event_id`. Start a new session when the gap since that user's previous event is greater than `timeout`. If the gap equals `timeout`, keep the event in the same session.**
+- `events` is a list of `(user_id, timestamp, event_id)` tuples. Both IDs are nonempty strings. `timestamp` and `timeout` are nonnegative integers measured in the same unit.
+- Number each user's sessions starting at 1. Use the first and last event timestamps as the inclusive start and end of the session. Count every event row, including exact duplicates.
+- Return a list of `(user_id, session_number, start_timestamp, end_timestamp, event_count)` tuples sorted by `user_id`, then by `session_number`. If `events` is empty, return `[]`.
 
 ## Example 1
 
