@@ -1,6 +1,6 @@
 # Practice catalog: 20 focused questions
 
-Reviewed November 14, 2026. The bank now contains 20 Medium/Hard exercises: 17 retained or upgraded questions and three additions. Folder IDs stay stable. The two role guides each assign ten questions; shared questions need one implementation and role-specific discussion.
+Reviewed November 14, 2026. The bank now contains 20 Medium/Hard exercises: 17 retained or upgraded questions and three additions. Folder IDs stay stable. The role guides set their own practice order. For shared questions, reuse your implementation and rehearse the discussion for each role.
 
 Relevance is a preparation judgment based on the user's roles and interview experience, not a verified team requirement. Local difficulty comes from each README. The [Waymo route](waymo_interview_prep.md) and [NVIDIA route](nvidia_interview_prep.md) own the role-specific selections, official LeetCode comparisons and complexity discussion.
 

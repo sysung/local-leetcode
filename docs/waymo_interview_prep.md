@@ -1,47 +1,50 @@
-# Waymo senior data engineer: ten Medium/Hard questions
+# Waymo senior data engineer interview prep
 
-Reviewed November 14, 2026. Target: [Senior Data Engineer, Mountain View, job 7438328](https://careers.withwaymo.com/jobs/senior-data-engineer-mountain-view-california-united-states?gh_jid=7438328&gh_src=e2a2625d1us).
+Updated November 17, 2026.
 
-## Evidence and priorities
+The initial interview is **45 minutes of general coding, up to LeetCode Medium**. Use Python for the practice below. The recruiter also lists C++ and Java. Review arrays, hash maps, sets, strings, sorting, grouping and aggregation, and sliding windows. Skip advanced graphs, bit manipulation, and complex dynamic programming for this screen. [Recruiter email and attached Coding Prep Guide](https://mail.google.com/mail/u/0/#inbox/FMfcgzQjgqQBNCjfKZtpLMgXzqHHRmJF)
 
-You reported that the first round is LeetCode-style. The exact posting could not be reliably retrieved, so the applications below are preparation scenarios for data engineering, not verified duties of this team.
+## One-day practice order
 
-[Aced's Container With Most Water entry](https://www.aced.io/questions/4341/container-with-most-water) lists Waymo and Data Engineer, and says it was reported two years ago. This is weak community attribution: it does not establish that the report came from this role or round. The [Waymo question list](https://www.aced.io/questions?company=waymo), [Interview Query guide](https://www.interviewquery.com/interview-guides/waymo), [Dataford DE guide](https://dataford.io/interview-guides/waymo/data-engineer), and [PracHub list](https://prachub.com/companies/waymo) are third-party preparation resources, not a verified question bank. Cross-role lists can overemphasize robotics/pathfinding. The [supplied Claude artifact](https://claude.ai/artifact/Lkz1hQH6qitxSg9ATUttDg#943c5549-8b2b) could not be retrieved and contributes no factual claims here.
+Do the first three problems in order. Budget about two hours for 45 minutes on Local 28, 25 minutes each on LC 49 and LC 3, and 20 minutes to redo the weakest part and explain time, space, and edge cases aloud. If you only have 45 minutes, do Local 28 as a mock. If you can already solve it from scratch, use Local 32 for the mock and skip its optional slot below.
 
-The selection deliberately covers hash maps, selection, two pointers, heaps, intervals, directed graphs, binary search, grid traversal, prefix sums, and sliding windows. Official LeetCode statements linked below define the external problems. Local difficulty labels come from their READMEs.
+| Rank | Problem | Level | What to review |
+| --- | --- | --- | --- |
+| 1 | [Local 28. Sessionize behavioral events](../28_behavioral_sessions/README.md) | Medium | Sort and scan groups. Check shuffled rows, exact duplicates, and a gap equal to the timeout. Explain memory use if one user has most of the events. |
+| 2 | [LC 49. Group Anagrams](https://leetcode.com/problems/group-anagrams/) | Medium | Group strings by a stable key. Compare sorted keys with character-count keys for a fixed alphabet. Try duplicate and empty strings. |
+| 3 | [LC 3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/) | Medium | Variable sliding window. Explain what makes the window valid and why each pointer moves only forward. Dry-run `abba`. |
 
-## Practice in this order
+### If you have more time
 
-Each row is one required attempt. The comparison is an alternative, not an extra assignment. These are recommendations, not claims that Waymo asks these exact ten questions.
+Work down this list after reviewing the first three.
 
-| # | Selected question | Difficulty | Main theme and application | Local versus official LeetCode: which to do and why |
-| --- | --- | --- | --- | --- |
-| 1 | [Local 05. Top failure codes](../05_top_failure_codes/README.md) | Medium, local | Frequency maps and bounded heap selection; rank recurring failures. | Choose local over [LC347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/) (Medium): the upgraded heap requirement adds selection depth while retaining deterministic ties. Set/multiset variants are discussion follow-ups. |
-| 2 | [Local 38. Container With Most Water](../38_container_with_most_water/README.md) | Medium, local | Two pointers and an elimination proof. | Equivalent core to [LC11](https://leetcode.com/problems/container-with-most-water/) (Medium), now with local tests. The local empty-input extension returns zero. Role relevance is indirect; it fills a reasoning gap. |
-| 3 | [Local 07. Merge sorted streams](../07_merge_sorted_streams/README.md) | Medium, local | Heap-based k-way merge; combine ordered event feeds. | Choose local over [LC23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) (Hard). The heap invariant is shared; ordinary lists and index tracking keep the focus on heap merging without linked-list rewiring or iterator APIs. |
-| 4 | [Local 09. Merge intervals](../09_merge_test_intervals/README.md) | Medium, local | Sort and scan; combine overlapping operational intervals. | Choose local over [LC56. Merge Intervals](https://leetcode.com/problems/merge-intervals/) (Medium). Algorithmic depth is comparable; local adds explicit nonmutation, zero-length and touching-boundary contracts. |
-| 5 | [Local 10. Order ETL tasks](../10_order_etl_tasks/README.md) | Medium, local | Topological sorting and cycle detection; schedule pipelines. | Choose local over [LC210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/) (Medium). Alphabetically smallest ready-task selection adds a heap and deterministic scheduling beyond any valid order. Local raises on cycles; LC returns an empty result. |
-| 6 | [Local 37. Historical keyed lookup](../37_historical_key_value/README.md) | Medium, local | Stateful API and predecessor binary search. | Choose local over [LC981](https://leetcode.com/problems/time-based-key-value-store/) (Medium): same append/query core with explicit invalid-write rejection and None for missing values. Empty strings remain valid. |
-| 7 | [LC200. Number of Islands](https://leetcode.com/problems/number-of-islands/) | Medium, official | Grid DFS/BFS and connected components; traversal representation practice. | Choose official over [local 27](../27_identity_components/README.md) for implicit grid neighbors and visited-state reasoning. Local identity components has stronger business framing, but different representation practice broadens this route. Spatial framing alone does not establish Waymo role relevance. |
-| 8 | [Local 36. Contiguous target sum](../36_contiguous_target_sum/README.md) | Medium, local | Prefix sums and frequency maps; signed contiguous aggregates. | Equivalent core to [LC560](https://leetcode.com/problems/subarray-sum-equals-k/) (Medium), with local tests and explicit empty-input/nonmutation rules. Negative values defeat a monotonic sliding window. |
-| 9 | [Local 12. Sliding temperature median](../12_sliding_temperature_median/README.md) | Hard, local | Two heaps, expiration and memory bounds; rolling telemetry statistics. | Choose local over [LC295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/) (Hard). Removing expired entries and compacting heaps adds depth beyond append-only medians. [LC480. Sliding Window Median](https://leetcode.com/problems/sliding-window-median/) (Hard) is the closer static-array analogue. |
-| 10 | [Local 35. Required event window](../35_required_event_window/README.md) | Hard, local | Frequency-count sliding window; shortest complete diagnostic span. | Choose local over [LC76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/) (Hard). Same multiplicity invariant, with event types and explicit half-open indices rather than returning text. Equivalent core depth, better DE framing. |
+| Rank | Problem | Level | What to review |
+| --- | --- | --- | --- |
+| 4 | [Local 32. Materialize profile state from CDC](../32_cdc_profile_state/README.md) | Medium | Keep one winning version per key. Check replayed rows, out-of-order updates, delete ties, and the cost of sorting the output. |
+| 5 | [Local 09. Combine hardware test sessions](../09_merge_test_intervals/README.md) or [LC 56. Merge Intervals](https://leetcode.com/problems/merge-intervals/) | Medium | Sort and scan intervals. Use the local version for the input-mutation contract. Both let you rehearse touching endpoints. |
+| 6 | [LC 643. Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/) | Easy | Fixed-size sliding window with a running aggregate. Check all-negative input, `k = 1`, and `k = n`. |
+| 7 | [Local 08. Detect repeated device failures](../08_rolling_failure_alerts/README.md) | Medium | Track a time window per key. Explain eviction at the cutoff and how many entries stay in memory, including when inactive keys retain stale entries. |
+| 8 | [LC 217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | Easy | Array scan, set membership, early exit, and the memory cost of tracking distinct values. |
+| 9 | [Local 05. Rank the most frequent failure codes](../05_top_failure_codes/README.md) | Medium | Revisit your frequency map. Explain full sorting as a baseline and when a bounded heap helps. Include tie ordering, distinct-key memory, and sorting the final selection. |
 
-## Correctness and complexity discussion
+## Run one 45-minute mock
 
-Use n for total items, u for distinct values, k for streams/window size as specified, and V/E for graph vertices/edges. These are solution targets, not statements that every implementation achieves them.
+The attachment’s technical interview section (pp. 18–22) emphasizes clarifying underspecified inputs, explaining decisions aloud, and demonstrating clean, runnable code with edge cases. It asks candidates to work independently during the interview and to tell the interviewer before looking anything up. Rehearse in a plain editor. The following time split is for practice.
 
-| Pick | Explain or test | Complexity target and senior follow-up |
-| --- | --- | --- |
-| 1 | Deterministic frequency ties; k near u; bounded heap selection. | Counting O(n); heap selection O(u log(k+1)) or buckets O(n+u), with O(u) or O(n+u) space. Discuss skewed keys and distributed top-k. |
-| 2 | Why discarding the shorter endpoint cannot lose a better answer; equal heights. | O(n) time, O(1) space. Explain the elimination proof before coding. |
-| 3 | Empty lists, equal timestamps, duplicate events and unchanged input. | O(k + n log(k+1)) time, O(k) heap state plus O(n) returned output. Discuss how out-of-order source events would change the assumptions. |
-| 4 | Touching endpoints and zero-length intervals; preserve input. | O(n log n) time, O(n) copy/output space. Explain why concurrency counting needs a different sweep. |
-| 5 | Self-cycles, duplicate prerequisites and prerequisite-only nodes. | O(E + V log V) time and O(V+E) space with heap-based Kahn traversal. Discuss failed-task retries separately from graph ordering. |
-| 6 | Query before first write, absent keys, exact timestamp. | Amortized O(1) valid append, O(1) rejected append, O(log m) lookup for m versions of a key; O(n) total state. Discuss retention and late insertion. |
-| 7 | Empty land, isolated cells, narrow grids, recursion depth. | O(rows × columns) time and worst-case auxiliary space. State whether mutation is allowed by the chosen interface. |
-| 8 | Initialize prefix frequency zero to one; negative numbers and repeated prefix sums. | Expected O(n) time and O(n) space. Explain why prefix multiplicity matters. |
-| 9 | Repeated values, even windows, expiring heap roots and buried stale entries. | O(n log(k+1)) time, O(k) auxiliary space with bounded compaction. Discuss exact versus approximate quantiles. |
-| 10 | Repeated requirements, missing events, empty target and earliest ties. | Expected O(n+r) time and O(d) count state for r target entries and d target types. Discuss bounded-state limits for an unbounded stream. |
+| Time | What to do |
+| --- | --- |
+| 0–5 min | Restate the contract. Ask about empty input, missing values, duplicate handling, tie order, and whether the input is sorted. |
+| 5–10 min | Walk through a small example. Explain your data structure choice and the condition your loop maintains. |
+| 10–30 min | Write runnable code with clear names. Talk through the decisions that affect correctness. |
+| 30–40 min | Run a normal case and two edge cases. For Local 28, use a gap equal to the timeout and a duplicate row. Discuss what should happen if an invalid or null field arrives. |
+| 40–45 min | State Big-O time and space. Include sorting, retained state, and output size where relevant. Explain what changes if one key dominates or the data does not fit in RAM. |
 
-Use the [catalog](practice_catalog.md) for shared overlap analysis and practice procedure. This Python route does not replace SQL preparation: review joins, grouping, window functions and deterministic latest-row selection separately. Use real experience to discuss pipeline incidents, backfills, skew and late data, without assuming those topics are confirmed for this first round.
+For the scale follow-up, distinguish the number of rows, the number of distinct keys, and the size of the largest group. For Local 28, explain which state a scan needs if input already arrives sorted by user and timestamp, and what it costs to establish that order otherwise.
+
+## Full-loop prep
+
+The recruiter describes a commercial data role involving dimensional modeling, Python pipelines, cloud warehousing, and data governance. The email lists three later 45-minute sessions. [Recruiter email](https://mail.google.com/mail/u/0/#inbox/FMfcgzQjgqQBNCjfKZtpLMgXzqHHRmJF)
+
+- **Data systems and architecture.** Practice designing a commercial event pipeline from ingestion to a fact table. Define the grain, choose a star or snowflake schema, and explain what changes at 10× volume.
+- **SQL and modeling.** Revisit Local 32 as a SQL drill. Use window functions for deterministic latest-row selection, then discuss tombstones, history, join cardinality, execution plans, and schema evolution.
+- **Leadership and behavioral.** Prepare STAR stories about owning an outcome, making progress with ambiguous requirements, and choosing a solution that benefited multiple teams.
