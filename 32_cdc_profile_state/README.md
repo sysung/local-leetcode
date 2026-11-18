@@ -11,14 +11,17 @@ updated: 2026-11-01
 
 ## Problem
 
-A customer profile table receives replayed and out-of-order change data capture records. Build its final live state.
+- **Implement `materialize_profiles(changes)` to determine which customer profiles are still live after all changes and return their final values.**
 
-Implement `materialize_profiles(changes)`.
+### Input
 
 - `changes` is a list of `(profile_id, version, operation, value)` tuples. Profile IDs are nonempty strings and versions are nonnegative integers.
 - `operation` is either `"upsert"` or `"delete"`. An upsert's `value` is a string, including the empty string. A delete's `value` is `None`.
+
+### Rules
+
 - For each profile, the highest version wins. At the same version, delete wins over upsert. Among conflicting upserts at the same version, the lexicographically greatest value wins.
-- Exact duplicate changes have no additional effect. Input order never changes the result. A later upsert can recreate a deleted profile.
+- Exact duplicate changes have no additional effect. Changes can arrive out of version order, and input order never changes the result. An upsert with a higher version can recreate a deleted profile.
 - Return `(profile_id, version, value)` tuples for live profiles only, sorted by profile ID. Preserve a delete's winning version internally so that older upserts cannot resurrect it.
 
 ## Example 1
